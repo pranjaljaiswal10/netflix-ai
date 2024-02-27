@@ -1,29 +1,38 @@
-import { useRef, useState } from "react";
+import {  useState } from "react";
 import { BG_URL } from "../utils/constant";
 import Header from "./Header";
 import {
-  getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   updateProfile,
 } from "firebase/auth";
+import { auth } from "../utils/firebase";
+import { checkValidData } from "../utils/validate";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const navigate=useNavigate()
   const [isSignInForm, setIsSigInForm] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
-  const password = useRef(null);
-  const email = useRef(null);
-  const name = useRef(null);
-  const auth = getAuth();
+  const [form,setForm]=useState({email:"",name:"",password:""})
+  const handleFormChange=(e)=>{
+    setForm({...form,[e.target.id]:e.target.value})
+  }
+  const handleSubmit=(e)=>{
+    e.preventDefault()
+    const message=checkValidData(form.email,form.password)
+    setErrorMessage(message)
+    if(message) return;
   if (!isSignInForm) {
     createUserWithEmailAndPassword(
       auth,
-      email.current.value,
-      password.current.value
+      form.email,
+      form.password
     )
       .then((userCredential) => {
         // Signed up
         const user = userCredential.user;
+        console.log(user)
         updateProfile(user, {});
         // ...
       })
@@ -36,11 +45,13 @@ const Login = () => {
   } else {
     signInWithEmailAndPassword(
       auth,
-      email.current.value,
-      password.current.value
+     form.email,
+     form.password
     )
       .then((userCredential) => {
         const user = userCredential.user;
+        navigate("/browse")
+        console.log(user)
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -48,6 +59,10 @@ const Login = () => {
         setErrorMessage(`${errorCode}-${errorMessage}`);
       });
   }
+}
+const toggleSignUpForm=()=>{
+  setIsSigInForm(!isSignInForm)
+}
   return (
     <>
       <Header />
@@ -56,30 +71,31 @@ const Login = () => {
         alt=""
         className=" object-cover absolute w-screen h-screen"
       />
-      <form className="relative  m-auto w-3/12 top-40 rounded-md space-y-6 text-white bg-black bg-opacity-80 p-14">
+      <form onSubmit={handleSubmit} className="relative  m-auto w-3/12 top-40 rounded-md space-y-6 text-white bg-black bg-opacity-80 p-14">
         <h1 className="font-bold text-2xl text-white">
           {isSignInForm ? "SignIn" : "SignUp"}
         </h1>
         <input
-          type="emai"
+          type="email"
           className="bg-gray-700 p-4 w-full rounded font-semibold bg-opacity-80 outline-slate-300"
-          placeholder="Email"
-          ref={email}
+          placeholder="Email" id="email"
+          value={form.email} onChange={handleFormChange}
         />
+      
         {!isSignInForm && (
           <input
-            type="text"
+            type="text" id="name"
             className="bg-gray-700 p-4 w-full rounded outline-slate-300"
             placeholder="name"
-            ref={name}
+          value={form.name} onChange={handleFormChange}
           />
         )}
         <input
           type="password"
           className="bg-gray-700 p-4 w-full outline-slate-200 rounded bg-opacity-80"
-          name="password"
+          name="password" id="password"
           placeholder="Password"
-          ref={password}
+          value={form.password} onChange={handleFormChange}
         />
         <button
           type="submit"
@@ -87,12 +103,13 @@ const Login = () => {
         >
           {isSignInForm ? "SignIn" : "SignUp"}
         </button>
+        { errorMessage&& <h2>{errorMessage}</h2>}
         {isSignInForm ? (
-          <button className="font-semibold">
+          <button className="font-semibold" onClick={toggleSignUpForm}>
             New to Netflix?<span className="hover:underline">Sign Up Now</span>
           </button>
         ) : (
-          <button className="font-semibold">
+          <button className="font-semibold" onClick={toggleSignUpForm}>
             Already registered?
             <span className="hover:underline">Sign In Now</span>
           </button>

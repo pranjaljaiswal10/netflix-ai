@@ -1,5 +1,5 @@
 import {  useState } from "react";
-import { BG_URL } from "../utils/constant";
+import { BG_URL, USER_AVATAR } from "../utils/constant";
 import Header from "./Header";
 import {
   createUserWithEmailAndPassword,
@@ -9,9 +9,12 @@ import {
 import { auth } from "../utils/firebase";
 import { checkValidData } from "../utils/validate";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addUser } from "../utils/userSlice";
 
 const Login = () => {
   const navigate=useNavigate()
+  const dispatch=useDispatch()
   const [isSignInForm, setIsSigInForm] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
   const [form,setForm]=useState({email:"",name:"",password:""})
@@ -33,7 +36,18 @@ const Login = () => {
         // Signed up
         const user = userCredential.user;
         console.log(user)
-        updateProfile(user, {});
+        updateProfile( user,{
+   displayName:form.name,
+   photoURL:USER_AVATAR
+      } ).then(()=>{
+        const {uid,email,displayName,photoURL}=auth.currentUser;
+        dispatch(addUser({
+          id:uid,
+          email:email,
+          userName:displayName,
+          userImage:photoURL
+        }))
+      });
         // ...
       })
       .catch((error) => {
@@ -103,7 +117,6 @@ const toggleSignUpForm=()=>{
         >
           {isSignInForm ? "SignIn" : "SignUp"}
         </button>
-        { errorMessage&& <h2>{errorMessage}</h2>}
         {isSignInForm ? (
           <button className="font-semibold" onClick={toggleSignUpForm}>
             New to Netflix?<span className="hover:underline">Sign Up Now</span>

@@ -4,6 +4,7 @@ import Header from "./Header";
 
 
 const Browse = () => {
+  
   const moviesList=useMovies()
  console.log(moviesList)
   return (<>

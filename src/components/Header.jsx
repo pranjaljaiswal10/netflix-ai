@@ -1,5 +1,5 @@
 import { onAuthStateChanged, signOut } from "firebase/auth";
-import { LOGO, SUPPORTED_LANGUAGES } from "../utils/constant";
+import { LOGO } from "../utils/constant";
 import {auth} from "../utils/firebase"
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
@@ -7,17 +7,19 @@ import { useNavigate } from "react-router-dom";
 import { addUser, removeUser } from "../utils/userSlice";
 
 const Header = () =>{
-  //  const userDetail=useSelector((store)=>store.user)
-  
+   const userDetail=useSelector((store)=>store.user)
+console.log(userDetail)
   const dispatch=useDispatch()
   const navigate=useNavigate()
   const handleSignOut=()=>{
-    signOut(auth).then(()=>{}).catch((error)=>{
+    signOut(auth).then(()=>{
+      navigate("/")
+    }).catch((error)=>{
       console.error(error)
-      navigate("/errot")
+      navigate("/error")
     })
   }
-  // console.log(userDetail)
+ 
   useEffect(()=>{ 
     const unSubscribe=onAuthStateChanged(auth,(user)=>{
     if(user){
@@ -38,15 +40,11 @@ const Header = () =>{
  return ()=>unSubscribe()
   },[])
   return(
-   <>
-    <img src={LOGO} alt="netflix_logo" className="w-1/6 p-0 m-0 absolute z-10"/>
-    <ul>
-      <li></li>
-      <li>HomePage</li>
-      {/* <li>{userDetail.userImage}<button onClick={handleSignOut}></button></li> */}
-      
-          </ul>
-   </>    
+   <div className="absolute w-screen flex-row z-10 text-white flex py-2 px-8 justify-between bg-gradient-to-b from-black" >
+    <img src={LOGO} alt="netflix_logo" className="w-44 p-0 m-0  "/>
+      <button className="flex-end">Homepage</button>
+      {userDetail&&<button onClick={handleSignOut}><img src={userDetail.userImage} className="rounded mr-4 inline"alt="" /><span>(signOut)</span></button>}
+   </div>    
   )
 }
 export default Header;

@@ -47,15 +47,20 @@ const Login = () => {
           userName:displayName,
           userImage:photoURL
         }))
-      });
+      }).catch((error)=>
+      setErrorMessage(error.message));
         // ...
-      })
+      navigate("/browse")
+      }
+      
+      )
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
         setErrorMessage(`${errorCode}-${errorMessage}`);
         // ..
-      });
+      })
+      ;
   } else {
     signInWithEmailAndPassword(
       auth,

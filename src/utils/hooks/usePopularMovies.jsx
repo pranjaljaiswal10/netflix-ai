@@ -5,7 +5,7 @@ import { API_OPTIONS } from "../constant";
 
 
 
-const useMovies = () => {
+const usePopularMovies = () => {
   
     const [popularMovies,setPopularMovies]=useState(null)
   async function getData(){
@@ -13,8 +13,8 @@ const useMovies = () => {
             "https://api.themoviedb.org/3/movie/popular?page=1",
             API_OPTIONS
           );
-        const data=await response.json();
-      setPopularMovies(data)
+        const data=await response.json()
+      setPopularMovies(data.results)
         }
     
     useEffect(()=>{
@@ -22,4 +22,4 @@ const useMovies = () => {
     },[])
     return popularMovies;
 }
-export default useMovies;
+export default usePopularMovies;

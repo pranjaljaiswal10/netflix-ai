@@ -1,16 +1,23 @@
-import {  IMG_CDN_URL } from "../utils/constant";
-import useMovies from "../utils/hooks/usePopularMovies";
+
+import usePopularMovies from "../utils/hooks/usePopularMovies";
+import useNowPlaying from "../utils/hooks/useNowPlaying";
+import useTopRated from "../utils/hooks/useTopRated";
+import useUpcoming from "../utils/hooks/useUpcoming";
+import Movielist from "./Movielist";
+import { useSelector } from "react-redux";
 
 const SecondaryContainer = () => {
-    const moviesList=useMovies()
-    console.log(moviesList)
+    usePopularMovies()
+    useNowPlaying()
+    useTopRated()
+    useUpcoming()
+   const movies=useSelector(store=>store.movies)   
+  console.log(movies)  
   return (<>
-  <div className="popular flex flex-wrap space-8 top-64 absolute">
-      {
-       moviesList&& moviesList.map((item)=>(
-       <img src={`${IMG_CDN_URL}${item.poster_path}}`} className="w-36" alt={item.original_title} key={item.id} />))
-      }
-    </div>
+  <Movielist title="Now Playing" moviesList={movies.nowPlaying} />
+  <Movielist title="Popular" moviesList={movies.popularMovies}/>
+  <Movielist title="Top Rated" moviesList={movies.topRated}/>
+  <Movielist title="Upcoming" moviesList={movies.upcoming}/>
   </>);
 };
 

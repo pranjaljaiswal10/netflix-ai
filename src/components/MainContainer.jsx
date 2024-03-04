@@ -10,9 +10,9 @@ const MainContainer = () => {
    if(!movies) return;
    const {original_title,overview,id}=movies[0]
   return (<>
-   <VideoTitle title={original_title} info={overview}/>
-   <VideoBackground movieId={id}/>
-   {/* <GPTMovieSuggestions/> */}
+   {/* <VideoTitle title={original_title} info={overview}/>
+   <VideoBackground movieId={id}/> */}
+   <GPTMovieSuggestions/>
   </>);
 };
 

@@ -1,14 +1,11 @@
 
 const Movielist = ({title,movieList})=>{
-    if(!movieList) return
+    console.log(movieList)
     return(
    <>
    <h1>{title}</h1>
    {
-   movieList.map((item)=>(
-    <div key={item.id}>
-    <img src="" alt="" />
-    </div>
+   
 }
    </>
     )

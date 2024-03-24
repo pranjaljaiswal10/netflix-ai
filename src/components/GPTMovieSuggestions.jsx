@@ -7,11 +7,9 @@ const GPTMovieSuggestions = () => {
  async function searchMovies(name){
     const response= await fetch(`1https://api.themoviedb.org/3/search/movie?query=${name}&include_adult=false&language=en-US&page=1`)
     const data=await response.json();
+    console.log(data.results)
      return data.results;
   }
-
-
-
   const handleOnClick=async()=>{
     const openai=new OpenAI({
       apiKey:import.meta.env.VITE_OPENAI_API_KEY
@@ -26,11 +24,8 @@ const GPTMovieSuggestions = () => {
     return completion.choices[0].message.content
      }
   const result=gptResult().split(", ")
-  
-  const tmdbMovies=Promise.all( result.map((item)=>{
-    return searchMovies(item)
-  }))
- }
+  console.log(result)
+    }
   return (<>
   <input type="text" placeholder="" value={searchTxt} onChange={(e)=>setSearchTxt(e.target.value)} />
   <button onClick={(e)=>handleOnClick(e)}>Search</button>

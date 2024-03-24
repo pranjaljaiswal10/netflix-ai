@@ -2,21 +2,18 @@
 import { BG_URL } from "../utils/constant";
 import MainContainer from "./MainContainer";
 import SecondaryContainer from "./SecondaryContainer";
-import usePopularMovies from "../utils/hooks/usePopularMovies";
-import useNowPlaying from "../utils/hooks/useNowPlaying";
-import useTopRated from "../utils/hooks/useTopRated";
-import useUpcoming from "../utils/hooks/useUpcoming";
+import useGeTMovies from "../utils/hooks/useGetMovies";
+
 
 const Browse = () => {
-  usePopularMovies()
-    useNowPlaying()
-    useTopRated()
-    useUpcoming()
+  const moviesType=["now_playing","top_rated","popular","upcoming"]
+  useGeTMovies(moviesType)
+  
 
  
   return (<>
 
-    {/* <img src={BG_URL} alt="" className="relative" /> */}
+    <img src={BG_URL} alt="" className="relative" />
      <MainContainer/>
      <SecondaryContainer/>
   </>);

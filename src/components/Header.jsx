@@ -38,7 +38,7 @@ console.log(userDetail)
     }
   })
  return ()=>unSubscribe()
-  },[])
+  },[dispatch,navigate])
   return(
    <div className="absolute w-screen flex-row z-10 text-white flex py-2 px-8 justify-between bg-gradient-to-b from-black" >
     <img src={LOGO} alt="netflix_logo" className="w-44 p-0 m-0  "/>

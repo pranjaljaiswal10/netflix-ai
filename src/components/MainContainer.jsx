@@ -5,14 +5,14 @@ import GPTMovieSuggestions from "./GPTMovieSuggestions";
 
 
 const MainContainer = () => {
-  const  movies=useSelector((store)=>store.movies.popularMovies)
-  
+  const  movies=useSelector((store)=>store.movies.popular)
+  console.log(movies)
    if(!movies) return;
    const {original_title,overview,id}=movies[0]
   return (<>
-   {/* <VideoTitle title={original_title} info={overview}/>
-   <VideoBackground movieId={id}/> */}
-   <GPTMovieSuggestions/>
+   <VideoTitle title={original_title} info={overview}/>
+   <VideoBackground movieId={id}/>
+   {/* <GPTMovieSuggestions/> */}
   </>);
 };
 

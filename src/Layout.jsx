@@ -1,7 +1,7 @@
 import { Provider } from "react-redux";
 import { Outlet } from "react-router-dom";
-import appStore from "../utils/appStore";
-import Header from "./Header";
+import appStore from "./utils/appStore";
+import Header from "./components/Header";
 
 
 const Layout = () => {

@@ -8,13 +8,13 @@ const gptSlice=createSlice({
         gptList:null
     },
     reducers:{
-       addResult:(action)=>{
-        return action.payload
+       addResult:(state,action)=>{
+    state.gptResult=action.payload
        },
        toggleGPTBar:(state)=>{
         state.showGPT=!state.showGPT
-       },addList:(action)=>{
-        return action.payload
+       },addList:(state,action)=>{
+        state.gptList=action.payload
        } 
     }
 })

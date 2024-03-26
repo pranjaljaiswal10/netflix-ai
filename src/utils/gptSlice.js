@@ -3,18 +3,18 @@ import { createSlice } from "@reduxjs/toolkit";
 const gptSlice=createSlice({
     name:"gpt",
     initialState:{
-        gptResult:null,
+        movieResult:null,
         showGPT:true,
-        gptList:null
+        movieList:null
     },
     reducers:{
        addResult:(state,action)=>{
-    state.gptResult=action.payload
+    state.movieResult=action.payload
        },
        toggleGPTBar:(state)=>{
         state.showGPT=!state.showGPT
        },addList:(state,action)=>{
-        state.gptList=action.payload
+        state.movieList=action.payload
        } 
     }
 })

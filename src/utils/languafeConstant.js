@@ -3,11 +3,11 @@ const lang = {
       search: "Search",
       gptSearchPlaceholder: "What would you like to watch today?",
     },
-    hindi: {
+    hi: {
       search: "खोज",
       gptSearchPlaceholder: "आज आप क्या देखना चाहेंगे?",
     },
-    spanish: {
+    es: {
       search: "buscar",
       gptSearchPlaceholder: "¿Qué te gustaría ver hoy?",
     },

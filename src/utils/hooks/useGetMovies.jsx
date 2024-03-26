@@ -1,12 +1,12 @@
 import { useEffect  } from "react";
-import { API_OPTIONS } from "../constant";
+import { API_OPTIONS, movieCategory } from "../constant";
 import { useDispatch } from "react-redux";
-import { addNowPlaying, addPopular, addTopRated, addUpcoming } from "../moviesSlice";
+import { addMovie } from "../moviesSlice";
 
-const useGeTMovies = async(moviesType) => {
+const useGeTMovies = async() => {
     const dispatch=useDispatch();
-  
-   
+    // https://api.themoviedb.org/3/movie/{movie_id}/recommendations
+    
     async function getMovies(movie){
       const response = await fetch(
               `https://api.themoviedb.org/3/movie/${movie}?page=1`,
@@ -18,16 +18,13 @@ const useGeTMovies = async(moviesType) => {
     }
    useEffect(()=>{
     async function getData(){
-      const promises=moviesType.map((item)=>getMovies(item))
+      const promises=movieCategory.map((item)=>getMovies(item))
       const movies=await Promise.all(promises)
       console.log(movies)
-      dispatch(addTopRated(movies[0]))
-      dispatch(addNowPlaying(movies[1]))
-      dispatch(addUpcoming(movies[2]))
-      dispatch(addPopular(movies[3]))
+     dispatch(addMovie(movies))
   }
     getData()
-   },[moviesType,dispatch]) 
+   },[dispatch]) 
    
 
 };

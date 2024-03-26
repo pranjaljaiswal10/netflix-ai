@@ -1,17 +1,14 @@
 
-import Movielist from "./Movielist";
 import { useSelector } from "react-redux";
+import MovielistData from "./Movielist";
+import { movieCategory } from "../utils/constant";
 
 const SecondaryContainer = () => {
-  const {gptList,gptResult}=useSelector((store)=>store.gpt)
-   const movies=useSelector(store=>store.movies)  
-   console.log(gptList,gptResult)   
-  return (<>
-  <Movielist title="Now Playing" movies={movies.nowPlaying} />
-  <Movielist title="Popular" movies={movies.popular}/>
-  <Movielist title="Top Rated" movies={movies.topRated}/>
-  <Movielist title="Upcoming" movies={movies.upcoming}/>
-  </>);
+   const movies=useSelector(store=>store.movies.allMovies)
+   console.log(movies) 
+  return (
+    movieCategory.map((item,index)=><MovielistData key={item} title={item} moviePoster={movies[index]}/>)
+  );
 };
 
 export default SecondaryContainer;

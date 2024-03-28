@@ -3,9 +3,9 @@ import { createSlice } from "@reduxjs/toolkit";
 const gptSlice=createSlice({
     name:"gpt",
     initialState:{
-        movieResult:null,
+        movieResult:[],
         showGPT:true,
-        movieList:null
+        movieList:[]
     },
     reducers:{
        addResult:(state,action)=>{

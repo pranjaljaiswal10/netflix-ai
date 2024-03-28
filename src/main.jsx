@@ -8,6 +8,7 @@ import Login from "./components/Login.jsx"
 import Browse from './components/Browse.jsx'
 import Error from './components/Error.jsx';
 import MoviePage from './components/MoviePage.jsx';
+import Search from './components/GPTSearch.jsx';
 
 
 const router=createBrowserRouter([
@@ -23,8 +24,11 @@ const router=createBrowserRouter([
         path:"/browse",
         element:<Browse/>
       },{
-        path:"",
+        path:"/in/title/:movieId",
         element:<MoviePage/>
+      },{
+        path:"/search",
+        element:<Search/>
       }
     ]
   }
@@ -35,5 +39,5 @@ const router=createBrowserRouter([
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <RouterProvider router={router}/>
-  </React.StrictMode>,
+    </React.StrictMode>,
 )

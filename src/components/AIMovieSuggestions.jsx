@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import MovielistData from "./Movielist";
 
-const GPTMovieSuggestions = () => {
+const AIMovieSuggestions = () => {
   const { movieList, movieResult } = useSelector((store) => store.gpt);
   if(!movieList) return null
   return (
@@ -15,4 +15,4 @@ const GPTMovieSuggestions = () => {
   );
 };
 
-export default GPTMovieSuggestions;
+export default AIMovieSuggestions;

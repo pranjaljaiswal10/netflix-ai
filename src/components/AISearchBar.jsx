@@ -5,11 +5,10 @@ import { addList, addResult } from "../utils/gptSlice";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { API_OPTIONS, BG_URL } from "../utils/constant";
 
-const Search = () => {
+const AISearchBar = () => {
   const [searchTxt, setSearchTxt] = useState("");
   const dispatch = useDispatch();
   const identifier = useSelector((store) => store.config.lang);
-  const {option}=useSelector((store)=>store.search)
   async function searchMovies(name) {
     const response = await fetch(
       `https://api.themoviedb.org/3/search/movie?query=${name}&include_adult=false&language=en-US&page=1`,
@@ -37,8 +36,7 @@ const Search = () => {
    dispatch(addResult(tmdbMvies));
  }
   const handleOnClick = () => {
-   option==="TitleSearch"?searchMovies(searchTxt):
-  geminiQuery()
+    geminiQuery()
   }
 ;
   return (
@@ -57,4 +55,4 @@ const Search = () => {
   );
 };
 
-export default Search;
+export default AISearchBar;

@@ -73,22 +73,12 @@ const Header = () => {
             ))}
           </select>
         </li>
-        <li onClick={handleDropdown} className="relative">
-          search
-          {isOpen && (
-            <ul className="absolute">
-              <li >TitleSearch</li>
-              <li>GeminiSearch</li>
-            </ul>
-          )}
-        </li>
-
         <li>
           <button
             className="text-white bg-indigo-700 p-2 rounded"
             onClick={handleGPTtoggle}
           >
-            {gptToggleSearch ? "HomePage" : "GeminiSearch"}
+            {gptToggleSearch ? "HomePage" : "AISearch"}
           </button>
         </li>
         {userDetail && (

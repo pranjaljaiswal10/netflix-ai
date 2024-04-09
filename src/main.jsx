@@ -8,7 +8,6 @@ import Login from "./components/Login.jsx"
 import Browse from './components/Browse.jsx'
 import Error from './components/Error.jsx';
 import MoviePage from './components/MoviePage.jsx';
-import Search from './components/GPTSearch.jsx';
 
 
 const router=createBrowserRouter([
@@ -26,10 +25,7 @@ const router=createBrowserRouter([
       },{
         path:"/in/title/:movieId",
         element:<MoviePage/>
-      },{
-        path:"/search",
-        element:<Search/>
-      }
+      },
     ]
   }
 ])

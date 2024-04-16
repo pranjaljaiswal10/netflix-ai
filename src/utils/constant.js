@@ -24,4 +24,6 @@ export const SUPPORTED_LANGUAGES = [
   { identifier: "es", name: "Spanish" },
 ];
 
-export const OPENAI_KEY = import.meta.env.VITE_APP_OPENAI_KEY;
+export const SEARCH=[{value:"AI",label:"AI"},{value:"movieName",label:"MovieName"}]
+
+export const urls=(movieId)=>[`https://api.themoviedb.org/3/movie/${movieId}`,`https://api.themoviedb.org/3/movie/${movieId}/credits`,`https://api.themoviedb.org/3/movie/${movieId}/recommendations`,`https://api.themoviedb.org/3/movie/${movieId}/videos?language=en-US`]

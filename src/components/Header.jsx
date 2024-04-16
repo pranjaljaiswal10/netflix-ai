@@ -1,23 +1,22 @@
 import { onAuthStateChanged, signOut } from "firebase/auth";
-import { LOGO, SUPPORTED_LANGUAGES } from "../utils/constant";
+import { LOGO, SEARCH, SUPPORTED_LANGUAGES } from "../utils/constant";
 import { auth } from "../utils/firebase";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { addUser, removeUser } from "../utils/userSlice";
-import { toggleGPTBar } from "../utils/gptSlice";
 import { changeLanguage } from "../utils/configureSlice";
+import { changeOption } from "../utils/optionSlice";
+import { toggleSearchBar } from "../utils/searchSlice";
 
 const Header = () => {
-  const [isOpen, setIsOpen] = useState(false);
   const userDetail = useSelector((store) => store.user);
-  const gptToggleSearch = useSelector((store) => store.gpt.showGPT);
+  const search = useSelector((store) => store.search.showSearch);
+  const option= useSelector((store)=>store.option.searchType)
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const handleDropdown = () => {
-    setIsOpen(!isOpen);
-  };
+ 
   const handleSignOut = () => {
     signOut(auth)
       .then(() => {
@@ -28,12 +27,16 @@ const Header = () => {
         navigate("/error");
       });
   };
-  const handleGPTtoggle = () => {
-    dispatch(toggleGPTBar());
+  const handleSearchToggle = () => {
+    dispatch(toggleSearchBar());
   };
   const handlelanguagechange = (e) => {
     dispatch(changeLanguage(e.target.value));
   };
+
+  const handleSearchChange=(e)=>{
+    dispatch(changeOption(e.target.value))
+  }
   
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (user) => {
@@ -62,7 +65,16 @@ const Header = () => {
       </Link>
       <ul className="flex space-x-4 items-center">
         <li>
-          <select
+          {
+            search && <select value={option} onChange={handleSearchChange} className="bg-gray-900 text-white p-2 rounded cursor-pointer">
+            {
+             SEARCH.map((item)=><option value={item.value} key={item.label}>{item.label}</option>)
+            }
+            </select>
+          }
+        </li>
+        <li>
+         { search && <select
             onChange={handlelanguagechange}
             className="bg-gray-900 text-white p-2 rounded"
           >
@@ -72,13 +84,14 @@ const Header = () => {
               </option>
             ))}
           </select>
+}
         </li>
         <li>
           <button
-            className="text-white bg-indigo-700 p-2 rounded"
-            onClick={handleGPTtoggle}
+            className="text-white bg-indigo-700 p-2 rounded "
+            onClick={handleSearchToggle}
           >
-            {gptToggleSearch ? "HomePage" : "AISearch"}
+            {search ?  "Search":"HomePage"}
           </button>
         </li>
         {userDetail && (

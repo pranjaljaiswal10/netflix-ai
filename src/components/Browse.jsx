@@ -7,8 +7,8 @@ import AISearchBar from "./AISearchBar";
 
 const Browse = () => {
   useGetMovies();
-  const {showGPT}= useSelector((store) => store.gpt);
-  return showGPT ? (
+  const {showSearch}= useSelector((store) => store.search);
+  return showSearch ? (
     <>
      <AISearchBar />
       <AIMovieSuggestions />

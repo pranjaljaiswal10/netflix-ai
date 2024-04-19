@@ -1,15 +1,18 @@
+import { FaPlay } from "react-icons/fa6";
+import { GrCircleInformation } from "react-icons/gr";
+
 const VideoTitle = ({ title, info }) => {
   
   return (
-    <div className="w-screen aspect-video pt-[20%] px-24 absolute text-white bg-gradient-to-r from-black ">
+    <div className="w-screen aspect-video pt-[20%] px-10 absolute text-white  from-black ">
       <h1 className="text-6xl font-bold">{title}</h1>
-      <p className="w-1/4 text-lg py-6 ">{info}</p>
-      <div className="m-0">
-        <button className="bg-white text-black text-xl rounded-lg px-12 py-4 hover:opacity-80 ">
-          play
+      <p className="  py-6 w-2/5">{info}</p>
+      <div className=" flex">
+        <button className="bg-white text-black text-xl rounded px-6 py-2 hover:opacity-80 ">
+        <FaPlay className="inline font-semibold"/> Play
         </button>
-        <button className=" inline-block mx-2 bg-gray-500 text-white p-4 px-12 text-xl opacity-50 rounded-lg">
-          More Info
+        <button className=" mx-2 bg-gray-500 text-white py-2 px-6 text-xl  rounded">
+          <GrCircleInformation className="inline font-semibold"/> More Info
         </button>
       </div>
     </div>

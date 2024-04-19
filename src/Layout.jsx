@@ -8,7 +8,7 @@ import Footer from "./components/Footer";
 const Layout = () => {
   return (
     <Provider store={appStore}>
-        <Header/>
+    <Header/>
     <Outlet/>
     <Footer/>
     </Provider>

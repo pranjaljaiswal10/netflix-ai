@@ -2,7 +2,7 @@ import { onAuthStateChanged, signOut } from "firebase/auth";
 import { LOGO, SEARCH, SUPPORTED_LANGUAGES } from "../utils/constant";
 import { auth } from "../utils/firebase";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { addUser, removeUser } from "../utils/userSlice";
@@ -16,7 +16,7 @@ const Header = () => {
   const option= useSelector((store)=>store.option.searchType)
   const dispatch = useDispatch();
   const navigate = useNavigate();
- 
+  const {movieId}=useParams()
   const handleSignOut = () => {
     signOut(auth)
       .then(() => {
@@ -59,7 +59,7 @@ const Header = () => {
     return () => unSubscribe();
   }, [dispatch, navigate]);
   return (
-    <div className="absolute w-screen flex-row z-10 text-white flex py-1 px-8 justify-between bg-gradient-to-b from-black">
+    <div className="fixed w-screen  z-10 text-white flex py-1 px-8 justify-between bg-gradient-to-b from-black">
       <Link to="/browse">
         <img src={LOGO} alt="netflix_logo" className="w-36 p-0 m-0  " />
       </Link>
@@ -86,14 +86,14 @@ const Header = () => {
           </select>
 }
         </li>
-        <li>
+        {movieId==undefined && <li>
           <button
             className="text-white bg-indigo-700 p-2 rounded "
             onClick={handleSearchToggle}
           >
             {search ?  "Search":"HomePage"}
           </button>
-        </li>
+        </li>}
         {userDetail && (
           <li>
             <button onClick={handleSignOut}>

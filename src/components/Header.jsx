@@ -66,7 +66,7 @@ const Header = () => {
       <ul className="flex space-x-4 items-center">
         <li>
           {
-            search && <select value={option} onChange={handleSearchChange} className="bg-gray-900 text-white p-2 rounded cursor-pointer">
+            (search && movieId==undefined) && <select value={option} onChange={handleSearchChange} className="bg-gray-900 text-white p-2 rounded cursor-pointer">
             {
              SEARCH.map((item)=><option value={item.value} key={item.label}>{item.label}</option>)
             }
@@ -74,7 +74,7 @@ const Header = () => {
           }
         </li>
         <li>
-         { search && <select
+         { (search && movieId===undefined) && <select
             onChange={handlelanguagechange}
             className="bg-gray-900 text-white p-2 rounded"
           >

@@ -5,7 +5,6 @@ import { addMovie } from "../moviesSlice";
 
 const useGetMovies = async() => {
     const dispatch=useDispatch();
-    // https://api.themoviedb.org/3/movie/{movie_id}/recommendations
     const {allMovies}=useSelector((store)=>store.movies)
     async function getMovies(movie){
       const response = await fetch(

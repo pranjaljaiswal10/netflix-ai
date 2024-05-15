@@ -7,7 +7,7 @@ const AIMovieSuggestions = () => {
   console.log(movieResult)
   if(!movieList) return null
   return (
-    <div className="bg-black absolute top-60">
+    <div className="bg-black absolute top-80">
     {option==="AI"?(movieList &&
     movieList.map((item, index) => (
       <MovielistData key={item} title={item} moviePoster={movieResult[index]} />

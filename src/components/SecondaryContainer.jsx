@@ -6,7 +6,7 @@ const SecondaryContainer = () => {
   const movies = useSelector((store) => store.movies.allMovies);
   if(!movies) return null
   return (
-    <div className=" px-10 absolute top-[700px]">
+    <div className=" pl-10 absolute top-[700px] w-screen overflow-hidden">
       {movieCategory.map((item, index) => (
         <MovielistData key={item} title={item} moviePoster={movies[index]} />
       ))}

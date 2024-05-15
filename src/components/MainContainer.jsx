@@ -7,11 +7,12 @@ const MainContainer = () => {
   if (!movies) return;
   const nowPlaying = movies[0];
   const { original_title, overview, id } = nowPlaying[0];
+  console.log()
   return (
-    <>
-      <VideoTitle title={original_title} info={overview} />
+    <div>
+      <VideoTitle title={original_title} info={overview} id={id} />
       <VideoBackground movieId={id} />
-    </>
+    </div>
   );
 };
 

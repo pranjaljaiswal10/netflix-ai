@@ -50,8 +50,8 @@ const AISearchBar = () => {
 ;
   return (
     <div>
-        <img src={BG_URL} alt="" className="relative" />
-      <form onSubmit={(e) => e.preventDefault()} className="flex justify-center absolute top-40 inset-x-1/3 bg-black p-3 rounded w-2/5">
+        <img src={BG_URL} alt="" className="relative object-cover h-auto w-full" />
+      <form onSubmit={(e) => e.preventDefault()} className="flex justify-center absolute top-40 inset-x-1/3 bg-black p-3 rounded mx-auto w-3/5 sm:w-2/5 ">
         <input
           type="text"
           placeholder={lang[identifier].gptSearchPlaceholder}

@@ -4,6 +4,8 @@ import moviesReducer from "./moviesSlice";
 import searchReducer from "./searchSlice"
 import configReducer from "./configureSlice"
 import optionReducer from "./optionSlice"
+import playReducer from "./playSlice"
+
 
 const appStore=configureStore({
     reducer: {
@@ -11,7 +13,8 @@ const appStore=configureStore({
         movies:moviesReducer,
         search:searchReducer,
         config:configReducer,
-        option:optionReducer
+        option:optionReducer,
+        play:playReducer
     }
 })
 

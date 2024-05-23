@@ -14,11 +14,10 @@ const Browse = () => {
       <AIMovieSuggestions />
      </>
   ) : (
-    <div className="relative">
+    <>
     <MainContainer />
       <SecondaryContainer />
-
-    </div>
+   </>
   );
 };
 

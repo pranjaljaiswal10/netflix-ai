@@ -9,6 +9,7 @@ import { addUser, removeUser } from "../utils/userSlice";
 import { changeLanguage } from "../utils/configureSlice";
 import { changeOption } from "../utils/optionSlice";
 import { toggleSearchBar } from "../utils/searchSlice";
+import { GiHamburgerMenu } from "react-icons/gi";
 
 const Header = () => {
   const userDetail = useSelector((store) => store.user);
@@ -63,18 +64,17 @@ const Header = () => {
       <Link to="/browse">
         <img src={LOGO} alt="netflix_logo" className="w-36 p-0 m-0  " />
       </Link>
-      <ul className="flex space-x-4 items-center">
-        <li>
-          {
-            (search && movieId==undefined) && <select value={option} onChange={handleSearchChange} className="bg-gray-900 text-white p-2 rounded cursor-pointer">
+      <ul className="sm:flex space-x-4 items-center hidden">
+       { (search && movieId==undefined && userDetail) &&
+       <><li>
+             <select value={option} onChange={handleSearchChange} className="bg-gray-900 text-white p-2 rounded cursor-pointer">
             {
              SEARCH.map((item)=><option value={item.value} key={item.label}>{item.label}</option>)
             }
             </select>
-          }
         </li>
         <li>
-         { (search && movieId===undefined) && <select
+          <select
             onChange={handlelanguagechange}
             className="bg-gray-900 text-white p-2 rounded"
           >
@@ -84,16 +84,19 @@ const Header = () => {
               </option>
             ))}
           </select>
-}
         </li>
-        {movieId==undefined && <li>
+        </>
+}
+       {
+        (movieId==undefined&&userDetail) && <li>
           <button
             className="text-white bg-indigo-700 p-2 rounded "
             onClick={handleSearchToggle}
           >
-            {search ?  "Search":"HomePage"}
+            {search ?  "HomePage":"Search"}
           </button>
-        </li>}
+        </li>
+}
         {userDetail && (
           <li>
             <button onClick={handleSignOut}>
@@ -107,6 +110,7 @@ const Header = () => {
           </li>
         )}
       </ul>
+      <button className="sm:hidden">{<GiHamburgerMenu/>}</button>
     </div>
   );
 };

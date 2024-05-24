@@ -49,17 +49,19 @@ const AISearchBar = () => {
   }
 ;
   return (
-    <div>
-        <img src={BG_URL} alt="" className="relative object-cover h-auto w-full" />
-      <form onSubmit={(e) => e.preventDefault()} className="flex justify-center absolute top-40 inset-x-1/3 bg-black p-3 rounded mx-auto w-3/5 sm:w-2/5 ">
+    <div className="relative ">
+        <img src={BG_URL} alt="" className="object-cover h-screen w-screen" />
+      <div className="absolute lg:w-4/12 w-8/12 sm:7/12 md:5/12 top-1/4 md:left-1/3 right-1/4 ">
+      <form onSubmit={(e) => e.preventDefault()} className="flex justify-center w-full bg-black sm:m-0 ml-10 p-3 text-sm sm:text-base rounded  ">
         <input
           type="text"
           placeholder={lang[identifier].gptSearchPlaceholder}
           value={searchTxt}
-          onChange={(e) => setSearchTxt(e.target.value)} className="p-3 w-4/5 rounded placeholder:text-slate-500"
+          onChange={(e) => setSearchTxt(e.target.value)} className=" py-3 px-3 w-9/12 rounded placeholder:text-slate-500"
         />
-        <button className="bg-red-700 text-white px-4 py-2 ml-4 w-1/5 rounded" onClick={(e) => handleOnClick(e)}>{lang[identifier].search}</button>
+        <button className="bg-red-700 text-white px-6 py-2 text-sm sm:text-base ml-4 w-3/12  rounded" onClick={(e) => handleOnClick(e)}>{lang[identifier].search}</button>
       </form>
+      </div>
     </div>
   
   );

@@ -85,7 +85,7 @@ const MoviePage = () => {
 </div>
 <div className="py-8">
     <h3  className="font-semibold text-xl pb-4">More Like this</h3>
-  <div className="grid grid-cols-5 justify-between  gap-x-24 gap-y-12">
+  <div className="grid lg:grid-cols-5 md:grid-cols-3 grid-cols-2 justify-between  lg:gap-x-24 lg:gap-y-12">
     {suggestionList.map((item)=>(
       <Link to={`/in/title/${item.id}`} key={item.id}>
          <div className="w-48  hover:border-slate-50 hover:border-4 rounded" >

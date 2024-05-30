@@ -32,7 +32,7 @@ export const SUPPORTED_LANGUAGES = [
 
 export const SEARCH = [
   { value: "AI", label: "AI" },
-  { value: "movieName", label: "MovieName" },
+  { value: "Title", label: "Title" },
 ];
 
 export const urls = (movieId) => [

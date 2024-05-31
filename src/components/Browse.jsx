@@ -3,6 +3,8 @@ import SecondaryContainer from "./SecondaryContainer";
 import useGetMovies from "../utils/hooks/useGetMovies";
 import { useSelector } from "react-redux";
 import AISearchBar from "./AISearchBar";
+import AIMovieSuggestions from "./AIMovieSuggestions";
+
 
 const Browse = () => {
   useGetMovies();
@@ -10,6 +12,7 @@ const Browse = () => {
   return showSearch ? (
     <>
      <AISearchBar />
+     <AIMovieSuggestions/>
      </>
   ) : (
     <>

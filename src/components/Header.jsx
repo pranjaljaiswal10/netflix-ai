@@ -20,7 +20,11 @@ const Header = () => {
   const navigate = useNavigate();
   const { movieId } = useParams();
   console.log(userDetail);
-  const handleButtonToggle = () => {
+  const handleButtonToggle = (e) => {
+   if(e.target.nodeName!=="IMG" && isVisisble===true)
+    {
+      setIsVisible(false)
+    }
     setIsVisible(!isVisisble);
   };
   const handleSignOut = () => {

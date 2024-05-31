@@ -7,8 +7,8 @@ const AIMovieSuggestions = () => {
   console.log(movieResult)
   if(!movieList) return null
   return (
-    <div className=" min-h-full absolute top-60">
-  <div className="   px-24">
+    <div className="bg-black opacity-90 rounded text-white m-8">
+
     {option==="AI"?(movieList.length>0 &&
     movieList.map((item, index) => (
       <MovielistData key={item} title={item} moviePoster={movieResult[index]} />
@@ -18,7 +18,6 @@ const AIMovieSuggestions = () => {
   
      )
     }
-    </div>
     </div>
     
   );

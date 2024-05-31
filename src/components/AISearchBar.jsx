@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addList, addResult } from "../utils/searchSlice";
 import { GoogleGenerativeAI, HarmBlockThreshold, HarmCategory } from "@google/generative-ai";
 import { API_OPTIONS, BG_URL } from "../utils/constant";
-import AIMovieSuggestions from "./AIMovieSuggestions";
+
 
 const AISearchBar = () => {
   const [searchTxt, setSearchTxt] = useState("");
@@ -50,8 +50,6 @@ const AISearchBar = () => {
       },
     ];
     const result=await model.generateContent(prompt,safetySettings);
-   
-    
     const response = await result.response;
     const text = response.text();
     const movieName = text.split(", ");
@@ -68,32 +66,31 @@ const AISearchBar = () => {
     option === "AI" ? geminiQuery() : normalQuery();
   };
   return (
-    <>
-    <div className="fixed top-0 w-full -z-10 overflow-hidden">
-      <img src={BG_URL} alt="" className="object-cover " />
+    <div>
+    <div className="fixed  -z-10 ">
+      <img src={BG_URL} alt="" className="object-cover md:h-full h-screen w-screen " />
       </div>
-      <div className=" flex justify-center">
+      <div className="flex justify-center md:pt-[10%] pt-[25%]">
         <form
           onSubmit={(e) => e.preventDefault()}
-          className="flex w-1/2 mx-auto mt-32 bg-black  sm:m-0 ml-10 p-3 text-sm sm:text-base rounded  "
+          className="flex bg-black w-full  md:w-1/2  p-3 text-sm sm:text-base rounded  "
         >
           <input
             type="text"
             placeholder={lang[identifier].gptSearchPlaceholder}
             value={searchTxt}
             onChange={(e) => setSearchTxt(e.target.value)}
-            className=" py-3 px-3 w-9/12 rounded placeholder:text-slate-500"
+            className=" py-3 px-3 w-10/12 rounded placeholder:text-slate-500"
           />
           <button
-            className="bg-red-700 text-white px-6 py-2 text-sm sm:text-base ml-4 w-3/12  rounded"
+            className="bg-red-700 text-white px-6 py-2 text-sm sm:text-base ml-4 w-2/12  rounded"
             onClick={(e) => handleOnClick(e)}
           >
             {lang[identifier].search}
           </button>
         </form>
-        </div>
-        <AIMovieSuggestions/>
-    </>
+       </div>
+    </div>
   );
 };
 

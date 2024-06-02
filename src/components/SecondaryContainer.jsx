@@ -4,10 +4,10 @@ import { movieCategory } from "../utils/constant";
 
 const SecondaryContainer = () => {
   const movies = useSelector((store) => store.movies.allMovies);
-  if(!movies) return null
+  if(!movies) return;
   return (
-    <div className="bg-black opacity-90 text-white">
-    <div className=" lg:px-12 md:px-8 sm:px-6 px-4 relative lg:-top-56 z-20  w-screen ">
+   <div className="bg-black opacity-90 text-white">
+    <div className=" lg:px-12 md:px-8 sm:px-6 px-4 lg:-mt-[10%] mt-[0%]  z-20  w-screen ">
       {movieCategory.map((item, index) => (
         <MovielistData key={item.category} title={item.category} moviePoster={movies[index]} />
       ))}

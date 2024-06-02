@@ -5,19 +5,23 @@ const searchSlice=createSlice({
     initialState:{
         movieResult:[],
         showSearch:false,
-        movieList:[]
+        movieList:[],
+        normalMovieResult:[]
     },
     reducers:{
        addResult:(state,action)=>{
-    state.movieResult=action.payload
+    state.movieResult.push(action.payload)
        },
        toggleSearchBar:(state)=>{
         state.showSearch=!state.showSearch
        },addList:(state,action)=>{
         state.movieList=action.payload
-       } 
+       },
+        addMovie:(state,action)=>{
+            state.normalMovieResult.push(action.payload)
+        }
     }
 })
 
 export default searchSlice.reducer;
-export const {addResult,toggleSearchBar,addList}=searchSlice.actions
+export const {addResult,toggleSearchBar,addList,addMovie}=searchSlice.actions

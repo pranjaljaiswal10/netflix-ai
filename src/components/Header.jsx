@@ -10,6 +10,7 @@ import { changeLanguage } from "../utils/configureSlice";
 import { changeOption } from "../utils/optionSlice";
 import { toggleSearchBar } from "../utils/searchSlice";
 import { FaCaretDown } from "react-icons/fa";
+import useOutsideClick from "../utils/hooks/useOutsideClick";
 
 const Header = () => {
   const [isVisisble, setIsVisible] = useState(false);
@@ -20,6 +21,9 @@ const Header = () => {
   const navigate = useNavigate();
   const { movieId } = useParams();
   console.log(userDetail);
+  const handleToggle=()=>{
+    setIsVisible(false)
+  }
   const handleButtonToggle = (e) => {
    if(e.target.nodeName!=="IMG" && isVisisble===true)
     {
@@ -27,6 +31,9 @@ const Header = () => {
     }
     setIsVisible(!isVisisble);
   };
+  
+  const ref=useOutsideClick(handleToggle)
+
   const handleSignOut = () => {
     signOut(auth)
       .then(() => {
@@ -69,20 +76,19 @@ const Header = () => {
     return () => unSubscribe();
   }, [dispatch, navigate]);
   return (
-    <nav className="fixed w-screen  z-10 text-white  py-1 px-8  bg-gradient-to-b from-black">
-      <div className="flex justify-between items-center">
+    <nav className="fixed  top-0 w-full flex justify-between  z-50 text-white  py-1 px-8  bg-gradient-to-b from-black">
         <Link to="/browse">
           <img src={LOGO} alt="netflix_logo" className="w-36 p-0 m-0  " />
         </Link>
-        <div className="relative">
+        
           {userDetail && (
-            <button onClick={handleButtonToggle} className="flex justify-center">
+            <button onClick={handleButtonToggle} ref={ref} className="flex pt-2 justify-center">
              {isVisisble&& <FaCaretDown />}
               <img src={userDetail.userImage} alt="" />
             </button>
           )}
-        </div>
-        {isVisisble && (
+  
+        {(isVisisble && userDetail)  && (
           <ul className="absolute text-sm md:text-base top-20 right-8 w-fit space-y-3 py-4 px-8 rounded-md border border-slate-50 bg-gray-900">
             {/* <li className="border-b border-gray-400">{`Hi! ${userDetail.name}`}</li> */}
             {search && movieId == undefined && (
@@ -134,7 +140,6 @@ const Header = () => {
             </li>
           </ul>
         )}
-      </div>
     </nav>
   );
 };

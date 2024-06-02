@@ -7,14 +7,14 @@ const MainContainer = () => {
   if (!movies) return;
   const nowPlaying = movies[0];
   const { original_title, overview, id } = nowPlaying[0];
-  console.log()
+
   return (
-    <main className="relative ">
-      <div className="overflow-hidden">
+    <>
+      <div className="">
       <VideoTitle title={original_title} info={overview} id={id} />
       </div>
       <VideoBackground movieId={id} />
-    </main>
+  </>
   );
 };
 

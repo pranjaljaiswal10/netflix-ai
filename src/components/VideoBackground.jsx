@@ -9,7 +9,7 @@ const VideoBackground = ({ movieId }) => {
   const {isPlaying}=useSelector((store)=>store.play)
  
   return (
-    <div className="p-0 w-screen overflow-hidden">
+    <div className="p-0 w-screen">
       {
       <iframe
         className=" w-screen  aspect-video"

@@ -17,16 +17,17 @@ const Login = () => {
   const [isSignInForm, setIsSigInForm] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
   const [form, setForm] = useState({ email: "", name: "", password: "" });
+  const [validMessage,setValidMessage]=useState(null)
   const handleFormChange = (e) => {
     setForm({ ...form, [e.target.id]: e.target.value });
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    const message = checkValidData(form.email, form.password);
-    console.log(message);
-    setErrorMessage(message);
-    if (message) return;
+    
     if (!isSignInForm) {
+      const message = checkValidData(form.email, form.password,form.name);
+     setValidMessage(message)
+      if(message) return
       createUserWithEmailAndPassword(auth, form.email, form.password)
         .then((userCredential) => {
           // Signed up
@@ -58,6 +59,9 @@ const Login = () => {
           // ..
         });
     } else {
+      const message = checkValidData(form.email, form.password);
+      setValidMessage(message)
+      if(message) return;
       signInWithEmailAndPassword(auth, form.email, form.password)
         .then((userCredential) => {
           const user = userCredential.user;
@@ -76,7 +80,7 @@ const Login = () => {
   };
   return (
     <div className="relative flex justify-center items-center">
-      <img src={BG_URL} alt="" className=" w-screen" />
+      <img src={BG_URL} alt="" className="object-cover" />
       <div className=" absolute lg:w-4/12 w-6/12 sm:7/12 md:5/12 lg:my-28  md:my-24 my-48">
         <form
           onSubmit={handleSubmit}
@@ -93,9 +97,9 @@ const Login = () => {
             value={form.email}
             onChange={handleFormChange}
           />
-          {/* {errorMessage?.email && <p>{errorMessage.email}</p>} */}
-          {!isSignInForm && (
-            <input
+          {validMessage?.email && <p className="text-red-700 text-sm md:text-base">{validMessage.email}</p>}
+          {!isSignInForm && 
+            ( <><input
               type="text"
               id="name"
               className="bg-gray-700 lg:text-base text-sm py-3 md:px-4 px-3  rounded-md bg-opacity-80 outline-slate-300 w-full"
@@ -103,7 +107,11 @@ const Login = () => {
               value={form.name}
               onChange={handleFormChange}
             />
-          )}
+          {(validMessage?.name&& !isSignInForm) && (<p className="text-red-700 text-sm md:tex-base">{validMessage.name}</p>)}
+          </>
+           )
+           }
+
           <input
             type="password"
             className="bg-gray-700 lg:text-base text-sm  py-3 md:px-4 px-3 outline-slate-200 rounded bg-opacity-80 w-full"
@@ -113,7 +121,7 @@ const Login = () => {
             value={form.password}
             onChange={handleFormChange}
           />
-          {/* {errorMessage?.password && <p>{errorMessage.password}</p>} */}
+          {validMessage?.password && <p className="text-red-700 text-sm md:text-base"> {validMessage.password}</p>}
           <button
             type="submit"
             className=" text-white bg-red-700  font-semibold py-2 my-3 w-full rounded-lg"

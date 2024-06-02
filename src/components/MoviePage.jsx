@@ -1,6 +1,7 @@
 import { Link, useParams } from "react-router-dom";
 import { API_OPTIONS, IMG_CDN_URL, urls } from "../utils/constant";
 import { useEffect, useState } from "react";
+import MoviePageShimmer from "./MoviePageShimmer";
 
 const MoviePage = () => {
   const { movieId } = useParams();
@@ -8,6 +9,8 @@ const MoviePage = () => {
   const [castDetail, setcastDetail] = useState(null);
   const [suggestionList, setSuggestionList] = useState(null);
   const [videoList, setVideoList] = useState(null);
+
+  
 
   useEffect(() => {
     const getData = async () => {
@@ -28,9 +31,9 @@ const MoviePage = () => {
     getData();
   }, [movieId]);
 
-  if (!movieDetail) return;
+  if (!movieDetail) return <MoviePageShimmer/>;
   const {
-    overview,
+    overview,tagline,
     release_date,
     poster_path,
     title,
@@ -42,22 +45,23 @@ const MoviePage = () => {
   const production = production_companies.map((item) => item.name);
   console.log(movieDetail);
   return (
-    <div className="bg-black w-full opacity-90 text-white p-16 pt-0">
+    <div className="bg-black w-full opacity-90 text-white px-16">
       <div
         className=" pt-16 items-center flex md:flex-row flex-col-reverse"  >  
           <div className=" pr-16 flex flex-col justify-center w-full md:w-8/12">
           <span className="block py-4 font-semibold text-lg">{title}</span>
           <span className="text-slate-400 text-sm">{`${
             release_date.split("-")[0]
-          } | ${Math.floor(runtime / 60)}h ${runtime % 60}m | ${
+          } | ${Math.floor(runtime / 60)}h ${(runtime % 60)}m | ${
             genreList[0]
           } `}</span>
           <p className="py-4 text-sm">{overview}</p>
         </div>
-        <div className="md:w-4/12 ">
-        <img src={`${IMG_CDN_URL}${poster_path}`} alt="" />
+        <div className="md:w-4/12 md:h-[600px]">
+        <img src={`${IMG_CDN_URL}${poster_path}`} alt="" className="h-full w-full" />
       </div>
       </div>
+      <p className="text-center my-16 py-4 border-y border-slate-500">{tagline}</p>
       <div className="py-8">
         <span className="font-semibold text-xl">Videos |</span>
         <span className="text-slate-300 text-sm">{title}</span>

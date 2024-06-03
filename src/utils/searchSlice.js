@@ -6,7 +6,7 @@ const searchSlice=createSlice({
         movieResult:[],
         showSearch:false,
         movieList:[],
-        normalMovieResult:[]
+        titleResult:[]
     },
     reducers:{
        addResult:(state,action)=>{
@@ -18,7 +18,7 @@ const searchSlice=createSlice({
         state.movieList=action.payload
        },
         addMovie:(state,action)=>{
-            state.normalMovieResult.push(action.payload)
+            state.titleResult=action.payload
         }
     }
 })

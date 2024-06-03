@@ -20,7 +20,6 @@ const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { movieId } = useParams();
-  console.log(userDetail);
   const handleToggle=()=>{
     setIsVisible(false)
   }
@@ -82,22 +81,22 @@ const Header = () => {
         </Link>
         
           {userDetail && (
-            <button onClick={handleButtonToggle} ref={ref} className="flex pt-2 justify-center">
+            <button onClick={handleButtonToggle} ref={ref} className="flex pt-2 items-center">
              {isVisisble&& <FaCaretDown />}
               <img src={userDetail.userImage} alt="" />
             </button>
           )}
   
         {(isVisisble && userDetail)  && (
-          <ul className="absolute text-sm md:text-base top-20 right-8 w-fit space-y-3 py-4 px-8 rounded-md border border-slate-50 bg-gray-900">
-            {/* <li className="border-b border-gray-400">{`Hi! ${userDetail.name}`}</li> */}
+          <ul className="absolute flex items-center flex-col text-sm md:text-base top-20 right-8 w-fit space-y-3 py-4 px-8 rounded-md border border-slate-50 bg-gray-900">
+            <li className="border-b border-gray-400">{`Hi! ${userDetail.userName}`}</li>
             {search && movieId == undefined && (
               <>
-                <li>
+                <li onClick={(e)=>e.stopPropagation()}>
                   <select
                     value={option}
                     onChange={handleSearchChange}
-                    className="text-black bg-slate-300 p-2 px-5 w-24 rounded cursor-pointer"
+                    className="text-black bg-slate-300 hover:text-white hover:bg-neutral-700 p-2 px-5 w-24 rounded cursor-pointer"
                   >
                     {SEARCH.map((item) => (
                       <option value={item.value} key={item.label}>
@@ -106,10 +105,10 @@ const Header = () => {
                     ))}
                   </select>
                 </li>
-                <li>
+                <li onClick={(e)=>e.stopPropagation()}>
                   <select
                     onChange={handlelanguagechange}
-                    className="bg-slate-300 text-black p-2 w-24  rounded cursor-pointer"
+                    className="bg-slate-300 hover:bg-stone-700 hover:text-white text-black p-2 w-24  rounded cursor-pointer"
                   >
                     {SUPPORTED_LANGUAGES.map((item) => (
                       <option key={item.identifier} value={item.identifier}>
@@ -123,7 +122,7 @@ const Header = () => {
             {movieId == undefined && (
               <li>
                 <button
-                  className="bg-slate-300 text-black p-2 w-24 rounded "
+                  className="bg-slate-300 hover:bg-indigo-800 hover:text-white text-black p-2 w-24 rounded "
                   onClick={handleSearchToggle}
                 >
                   {search ? "HomePage" : "Search"}
@@ -132,7 +131,7 @@ const Header = () => {
             )}
             <li>
               <button
-                className="bg-slate-300 text-black p-2  w-24 rounded"
+                className="bg-slate-300 hover:bg-red-700 text-black hover:text-white p-2  w-24 rounded"
                 onClick={handleSignOut}
               >
                 SignOut

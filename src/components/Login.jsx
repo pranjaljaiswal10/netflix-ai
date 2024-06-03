@@ -27,6 +27,7 @@ const Login = () => {
     if (!isSignInForm) {
       const message = checkValidData(form.email, form.password,form.name);
      setValidMessage(message)
+     console.log(message)
       if(message) return
       createUserWithEmailAndPassword(auth, form.email, form.password)
         .then((userCredential) => {
@@ -60,6 +61,7 @@ const Login = () => {
         });
     } else {
       const message = checkValidData(form.email, form.password);
+      console.log(message)
       setValidMessage(message)
       if(message) return;
       signInWithEmailAndPassword(auth, form.email, form.password)
@@ -80,11 +82,11 @@ const Login = () => {
   };
   return (
     <div className="relative flex justify-center items-center">
-      <img src={BG_URL} alt="" className="object-cover" />
+      <img src={BG_URL} alt="netflix" className="object-cover lg:h-screen w-screen" />
       <div className=" absolute lg:w-4/12 w-6/12 sm:7/12 md:5/12 lg:my-28  md:my-24 my-48">
         <form
           onSubmit={handleSubmit}
-          className="  rounded-md flex flex-col justify-center items-center px-8 py-4 sm:px-12 sm:py-6 lg:px-24 lg:py-10 space-y-4 md:space-y-8 text-white bg-black bg-opacity-80   "
+          className=" rounded-md flex flex-col justify-center items-center px-8 py-4 sm:px-12 sm:py-6 lg:px-24 lg:py-12 space-y-4 md:space-y-8 text-white bg-black bg-opacity-80   "
         >
           <h1 className="font-bold text-2xl text-white">
             {isSignInForm ? "SignIn" : "SignUp"}
@@ -122,6 +124,8 @@ const Login = () => {
             onChange={handleFormChange}
           />
           {validMessage?.password && <p className="text-red-700 text-sm md:text-base"> {validMessage.password}</p>}
+          {errorMessage && <p>{errorMessage}</p>}
+         
           <button
             type="submit"
             className=" text-white bg-red-700  font-semibold py-2 my-3 w-full rounded-lg"
@@ -129,17 +133,17 @@ const Login = () => {
             {isSignInForm ? "SignIn" : "SignUp"}
           </button>
           {isSignInForm ? (
-            <button className="font-semibold" onClick={toggleSignUpForm}>
+            <button type="button" className="font-semibold text-white " onClick={toggleSignUpForm}>
               New to Netflix?
               <span className="hover:underline">Sign Up Now</span>
             </button>
           ) : (
-            <button className="font-semibold" onClick={toggleSignUpForm}>
+            <button type="button" className="font-semibold text-white " onClick={toggleSignUpForm}>
               Already registered?
               <span className="hover:underline">Sign In Now</span>
             </button>
-          )}{" "}
-        </form>
+          )}
+          </form>
       </div>
     </div>
   );

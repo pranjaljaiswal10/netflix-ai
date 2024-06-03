@@ -20,7 +20,6 @@ const useGetMovies = async() => {
       async function getData(){
          const promises=movieCategory.map((item)=>getMovies(item.endpoint))
          const movies=await Promise.all(promises)
-         console.log(movies)
         dispatch(addMovie(movies))
      }
      if(!allMovies)

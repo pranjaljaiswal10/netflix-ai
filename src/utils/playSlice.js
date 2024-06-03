@@ -1,16 +1,20 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const playSlice=createSlice({
+const buttonSlice=createSlice({
     name:"play",
     initialState:{
-        isPlaying:false
+        isPlaying:false,
+        isMute:false
     },
     reducers:{
         togglePlay:(state)=>{
             state.isPlaying=!state.isPlaying
+        },
+        toggleMute:(state)=>{
+            state.isMute=!state.isMute
         }
     }
 })
 
-export default playSlice.reducer;
-export const {togglePlay}=playSlice.actions;
+export default buttonSlice.reducer;
+export const {togglePlay,toggleMute}=buttonSlice.actions;

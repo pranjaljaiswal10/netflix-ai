@@ -1,13 +1,16 @@
-import React from 'react'
+import React,{Suspense, lazy} from 'react'
 import ReactDOM from 'react-dom/client'
 import './index.css';
 import './App.css'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import Layout from './Layout.jsx'
 import Login from "./components/Login.jsx"
-import Browse from './components/Browse.jsx'
 import Error from './components/Error.jsx';
-import MoviePage from './components/MoviePage.jsx';
+import HomePageShimmer from './components/HomePageShimmer.jsx';
+import MoviePageShimmer from './components/MoviePageShimmer.jsx';
+
+const Browse=lazy(()=>import("./components/Browse.jsx"))
+const MoviePage=lazy(()=>import("./components/MoviePage.jsx"))
 
 
 const router=createBrowserRouter([
@@ -21,10 +24,17 @@ const router=createBrowserRouter([
         element:<Login/>
       },{
         path:"/browse",
-        element:<Browse/>
+        element:(
+        <Suspense fallback={<HomePageShimmer/>}>
+         <Browse/>
+        </Suspense>)
       },{
         path:"/in/title/:movieId",
-        element:<MoviePage/>
+        element:(
+        <Suspense fallback={<MoviePageShimmer/>}>
+        <MoviePage/>
+        </Suspense>
+        )
       },
     ]
   }

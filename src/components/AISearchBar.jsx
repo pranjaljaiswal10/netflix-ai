@@ -1,7 +1,7 @@
 import { useState } from "react";
 import lang from "../utils/languafeConstant";
 import { useDispatch, useSelector } from "react-redux";
-import { addList, addResult } from "../utils/searchSlice";
+import { addList, addMovie, addResult } from "../utils/searchSlice";
 import {
   GoogleGenerativeAI,
   HarmBlockThreshold,
@@ -25,8 +25,8 @@ const AISearchBar = () => {
     if (option === "AI") {
       return data.results;
     }
-    dispatch(addResult(data.results));
     if(option==='Title'){
+      dispatch(addMovie(data.results));
       setIsLoading(false)
     }
   }
@@ -69,7 +69,7 @@ const AISearchBar = () => {
     );
     const tmdbMvies = await promises;
     dispatch(addResult(tmdbMvies));
-    // setIsLoading(false)
+    setIsLoading(false)
   };
   const handleOnClick = () => {
     setIsLoading(true)
@@ -106,7 +106,7 @@ const AISearchBar = () => {
         </form>
       </div>
     </div>
-    {isLoading ?<SearchPageShimmer/>: null}
+    {isLoading && <SearchPageShimmer/>}
     </>
   );
 };

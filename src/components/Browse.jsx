@@ -9,14 +9,14 @@ import HomePageShimmer from "./HomePageShimmer";
 
 const Browse = () => {
   useGetMovies();
-  const {showSearch}= useSelector((store) => store.search);
+  const {showSearch,movieResult,titleResult}= useSelector((store) => store.search);
   const movies=useSelector((store)=>store.movies.allMovies)
   
   
   return showSearch ? (
-    <>
+  <>
      <AISearchBar />
-     <AIMovieSuggestions/>
+    { (movieResult.length!==0||titleResult.length!==0) &&( <AIMovieSuggestions/>)}
      </>
   ) : (
     movies?

@@ -17,7 +17,10 @@ const HomePageShimmer = () => {
           {Array(9)
             .fill(" ")
             .map((item, index) => (
-              <div key={index} className=" rounded w-36 h-48 bg-zinc-900 mr-4 my-2"></div>
+              <div
+                key={index}
+                className=" rounded w-36 h-48 bg-zinc-900 mr-4 my-2"
+              ></div>
             ))}
         </div>
       </div>

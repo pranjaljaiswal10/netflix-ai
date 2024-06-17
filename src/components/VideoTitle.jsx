@@ -7,7 +7,7 @@ import { toggleMute, togglePlay } from "../utils/playSlice";
 
 const VideoTitle = ({ title, info, id }) => {
   const dispatch = useDispatch();
-  const { isMute} = useSelector((store) => store.play);
+  const { isMute } = useSelector((store) => store.play);
   return (
     <div className="w-screen aspect-video lg:pt-[15%] md:pt-[15%] sm-[10%] px-6 md:px-12 absolute top-10 text-white  from-black ">
       <div className="w-1/2 mb-8">

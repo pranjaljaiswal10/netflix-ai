@@ -3,25 +3,26 @@ import { createSlice } from "@reduxjs/toolkit";
 const searchSlice=createSlice({
     name:"search",
     initialState:{
-        movieResult:[],
         showSearch:false,
-        movieList:[],
-        titleResult:[]
+        movieTitle:null,
+        aiMovieResult:null, //
+        titleMovieResult:null
     },
     reducers:{
-       addResult:(state,action)=>{
-    state.movieResult.push(action.payload)
+       addAIMovie:(state,action)=>{
+    state.aiMovieResult=action.payload
        },
        toggleSearchBar:(state)=>{
         state.showSearch=!state.showSearch
-       },addList:(state,action)=>{
-        state.movieList=action.payload
        },
-        addMovie:(state,action)=>{
-            state.titleResult=action.payload
+       addMovieTitle:(state,action)=>{
+        state.movieTitle=action.payload
+       },
+        addTitleMovie:(state,action)=>{
+            state.titleMovieResult=action.payload
         }
     }
 })
 
 export default searchSlice.reducer;
-export const {addResult,toggleSearchBar,addList,addMovie}=searchSlice.actions
+export const {addAIMovie,toggleSearchBar,addMovieTitle,addTitleMovie}=searchSlice.actions

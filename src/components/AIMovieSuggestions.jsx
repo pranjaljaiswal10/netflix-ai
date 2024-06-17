@@ -2,28 +2,31 @@ import { useSelector } from "react-redux";
 import MovielistData from "./Movielist";
 
 const AIMovieSuggestions = () => {
-  const { movieList, movieResult, titleResult } = useSelector(
-    (store) => store.search
-  );
+  const {
+    movieTitle,
+    aiMovieResult, 
+    titleMovieResult,
+  } = useSelector((store) => store.search);
   const option = useSelector((store) => store.option.searchType);
-  console.log(movieResult);
+  console.log(movieTitle)
   return (
+    
     <div
       className={`bg-black opacity-90 rounded text-white mx-8 ${
-        (movieResult.length == 0&& titleResult.length == 0 )? "mt-0" : "mt-24"
+      aiMovieResult && titleMovieResult ? "mt-0" : "mt-24"
       }`}
     >
       {option === "AI" ? (
-        (movieList.length > 0 || titleResult.length !== 0) &&
-        movieList.map((item, index) => (
+         movieTitle &&
+       ( movieTitle.map((item, index) => (
           <MovielistData
             key={item}
             title={item}
-            moviePoster={movieResult[index]}
+            moviePoster={aiMovieResult[index]}
           />
-        ))
+        )))
       ) : (
-        <MovielistData moviePoster={titleResult} />
+        <MovielistData title={movieTitle} moviePoster={titleMovieResult} />
       )}
     </div>
   );

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import lang from "../utils/languafeConstant";
 import { useDispatch, useSelector } from "react-redux";
-import { addList, addMovie, addResult } from "../utils/searchSlice";
+import { addAIMovie, addMovieTitle, addTitleMovie } from "../utils/searchSlice";
 import {
   GoogleGenerativeAI,
   HarmBlockThreshold,
@@ -12,7 +12,7 @@ import SearchPageShimmer from "./SearchPageShimmer";
 
 const AISearchBar = () => {
   const [searchTxt, setSearchTxt] = useState("");
-  const [isLoading,setIsLoading]=useState(false)
+  const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
   const identifier = useSelector((store) => store.config.lang);
   const option = useSelector((store) => store.option.searchType);
@@ -25,15 +25,15 @@ const AISearchBar = () => {
     if (option === "AI") {
       return data.results;
     }
-    if(option==='Title'){
-      dispatch(addMovie(data.results));
-      setIsLoading(false)
+    if (option === "Title") {
+      dispatch(addTitleMovie(data.results));
+      setIsLoading(false);
     }
   }
   const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_API_KEY);
 
   const normalQuery = () => {
-    dispatch(addList(searchTxt));
+    dispatch(addMovieTitle(searchTxt));
     searchMovies(searchTxt);
   };
   const geminiQuery = async () => {
@@ -61,52 +61,52 @@ const AISearchBar = () => {
     const response = await result.response;
     const text = response.text();
     const movieName = text.split(", ");
-    dispatch(addList(movieName));
+    dispatch(addMovieTitle(movieName));
     const promises = Promise.all(
       movieName.map((item) => {
         return searchMovies(item);
       })
     );
     const tmdbMvies = await promises;
-    dispatch(addResult(tmdbMvies));
-    setIsLoading(false)
+    dispatch(addAIMovie(tmdbMvies));
+    setIsLoading(false);
   };
   const handleOnClick = () => {
-    setIsLoading(true)
+    setIsLoading(true);
     option === "AI" ? geminiQuery() : normalQuery();
   };
   return (
     <>
-    <div>
-      <div className="fixed  -z-10 ">
-        <img
-          src={BG_URL}
-          alt=""
-          className="object-cover md:h-full h-screen w-screen "
-        />
-      </div>
-      <div className="flex justify-center md:pt-[10%] pt-[25%] ">
-        <form
-          onSubmit={(e) => e.preventDefault()}
-          className="flex bg-black w-full  md:w-1/2  p-3 text-sm sm:text-base rounded  "
-        >
-          <input
-            type="text"
-            placeholder={lang[identifier].gptSearchPlaceholder}
-            value={searchTxt}
-            onChange={(e) => setSearchTxt(e.target.value)}
-            className=" py-3 px-3 w-10/12 rounded placeholder:text-slate-500"
+      <div>
+        <div className="fixed  -z-10 ">
+          <img
+            src={BG_URL}
+            alt=""
+            className="object-cover md:h-full h-screen w-screen "
           />
-          <button
-            className="bg-red-700 text-white lg:px-6 py-2 text-sm sm:text-base ml-4 w-2/12  rounded"
-            onClick={(e) => handleOnClick(e)}
+        </div>
+        <div className="flex justify-center md:pt-[10%] pt-[25%] ">
+          <form
+            onSubmit={(e) => e.preventDefault()}
+            className="flex bg-black w-full  md:w-1/2  p-3 text-sm sm:text-base rounded  "
           >
-            {lang[identifier].search}
-          </button>
-        </form>
+            <input
+              type="text"
+              placeholder={lang[identifier].gptSearchPlaceholder}
+              value={searchTxt}
+              onChange={(e) => setSearchTxt(e.target.value)}
+              className=" py-3 px-3 w-10/12 rounded placeholder:text-slate-500"
+            />
+            <button
+              className="bg-red-700 text-white lg:px-6 py-2 text-sm sm:text-base ml-4 w-2/12  rounded"
+              onClick={(e) => handleOnClick(e)}
+            >
+              {lang[identifier].search}
+            </button>
+          </form>
+        </div>
       </div>
-    </div>
-    {isLoading && <SearchPageShimmer/>}
+      {isLoading && <SearchPageShimmer />}
     </>
   );
 };

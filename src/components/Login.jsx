@@ -17,18 +17,18 @@ const Login = () => {
   const [isSignInForm, setIsSigInForm] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
   const [form, setForm] = useState({ email: "", name: "", password: "" });
-  const [validMessage,setValidMessage]=useState(null)
+  const [validMessage, setValidMessage] = useState(null);
   const handleFormChange = (e) => {
     setForm({ ...form, [e.target.id]: e.target.value });
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+
     if (!isSignInForm) {
-      const message = checkValidData(form.email, form.password,form.name);
-     setValidMessage(message)
-     console.log(message)
-      if(message) return
+      const message = checkValidData(form.email, form.password, form.name);
+      setValidMessage(message);
+      console.log(message);
+      if (message) return;
       createUserWithEmailAndPassword(auth, form.email, form.password)
         .then((userCredential) => {
           // Signed up
@@ -61,9 +61,9 @@ const Login = () => {
         });
     } else {
       const message = checkValidData(form.email, form.password);
-      console.log(message)
-      setValidMessage(message)
-      if(message) return;
+      console.log(message);
+      setValidMessage(message);
+      if (message) return;
       signInWithEmailAndPassword(auth, form.email, form.password)
         .then((userCredential) => {
           const user = userCredential.user;
@@ -82,7 +82,11 @@ const Login = () => {
   };
   return (
     <div className="relative flex justify-center items-center">
-      <img src={BG_URL} alt="netflix" className="object-cover lg:h-screen w-screen" />
+      <img
+        src={BG_URL}
+        alt="netflix"
+        className="object-cover lg:h-screen w-screen"
+      />
       <div className=" absolute lg:w-4/12 w-6/12 sm:7/12 md:5/12 lg:my-28  md:my-24 my-48">
         <form
           onSubmit={handleSubmit}
@@ -99,20 +103,28 @@ const Login = () => {
             value={form.email}
             onChange={handleFormChange}
           />
-          {validMessage?.email && <p className="text-red-700 text-sm md:text-base">{validMessage.email}</p>}
-          {!isSignInForm && 
-            ( <><input
-              type="text"
-              id="name"
-              className="bg-gray-700 lg:text-base text-sm py-3 md:px-4 px-3  rounded-md bg-opacity-80 outline-slate-300 w-full"
-              placeholder="Full Name"
-              value={form.name}
-              onChange={handleFormChange}
-            />
-          {(validMessage?.name&& !isSignInForm) && (<p className="text-red-700 text-sm md:tex-base">{validMessage.name}</p>)}
-          </>
-           )
-           }
+          {validMessage?.email && (
+            <p className="text-red-700 text-sm md:text-base">
+              {validMessage.email}
+            </p>
+          )}
+          {!isSignInForm && (
+            <>
+              <input
+                type="text"
+                id="name"
+                className="bg-gray-700 lg:text-base text-sm py-3 md:px-4 px-3  rounded-md bg-opacity-80 outline-slate-300 w-full"
+                placeholder="Full Name"
+                value={form.name}
+                onChange={handleFormChange}
+              />
+              {validMessage?.name && !isSignInForm && (
+                <p className="text-red-700 text-sm md:tex-base">
+                  {validMessage.name}
+                </p>
+              )}
+            </>
+          )}
 
           <input
             type="password"
@@ -123,9 +135,14 @@ const Login = () => {
             value={form.password}
             onChange={handleFormChange}
           />
-          {validMessage?.password && <p className="text-red-700 text-sm md:text-base"> {validMessage.password}</p>}
+          {validMessage?.password && (
+            <p className="text-red-700 text-sm md:text-base">
+              {" "}
+              {validMessage.password}
+            </p>
+          )}
           {errorMessage && <p>{errorMessage}</p>}
-         
+
           <button
             type="submit"
             className=" text-white bg-red-700  font-semibold py-2 my-3 w-full rounded-lg"
@@ -133,17 +150,25 @@ const Login = () => {
             {isSignInForm ? "SignIn" : "SignUp"}
           </button>
           {isSignInForm ? (
-            <button type="button" className="font-semibold text-white " onClick={toggleSignUpForm}>
+            <button
+              type="button"
+              className="font-semibold text-white "
+              onClick={toggleSignUpForm}
+            >
               New to Netflix?
               <span className="hover:underline">Sign Up Now</span>
             </button>
           ) : (
-            <button type="button" className="font-semibold text-white " onClick={toggleSignUpForm}>
+            <button
+              type="button"
+              className="font-semibold text-white "
+              onClick={toggleSignUpForm}
+            >
               Already registered?
               <span className="hover:underline">Sign In Now</span>
             </button>
           )}
-          </form>
+        </form>
       </div>
     </div>
   );

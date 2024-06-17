@@ -20,18 +20,17 @@ const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { movieId } = useParams();
-  const handleToggle=()=>{
-    setIsVisible(false)
-  }
+  const handleToggle = () => {
+    setIsVisible(false);
+  };
   const handleButtonToggle = (e) => {
-   if(e.target.nodeName!=="IMG" && isVisisble===true)
-    {
-      setIsVisible(false)
+    if (e.target.nodeName !== "IMG" && isVisisble === true) {
+      setIsVisible(false);
     }
     setIsVisible(!isVisisble);
   };
-  
-  const ref=useOutsideClick(handleToggle)
+
+  const ref = useOutsideClick(handleToggle);
 
   const handleSignOut = () => {
     signOut(auth)
@@ -76,69 +75,73 @@ const Header = () => {
   }, [dispatch, navigate]);
   return (
     <nav className="fixed  top-0 w-full flex justify-between  z-50 text-white  py-1 px-8  bg-gradient-to-b from-black">
-        <Link to="/browse">
-          <img src={LOGO} alt="netflix_logo" className="w-36 p-0 m-0  " />
-        </Link>
-        
-          {userDetail && (
-            <button onClick={handleButtonToggle} ref={ref} className="flex pt-2 items-center">
-             {isVisisble&& <FaCaretDown />}
-              <img src={userDetail.userImage} alt="" />
-            </button>
-          )}
-  
-        {(isVisisble && userDetail)  && (
-          <ul className="absolute flex items-center flex-col text-sm md:text-base top-20 right-8 w-fit space-y-3 py-4 px-8 rounded-md border border-slate-50 bg-gray-900">
-            <li className="border-b border-gray-400">{`Hi! ${userDetail.userName}`}</li>
-            {search && movieId == undefined && (
-              <>
-                <li onClick={(e)=>e.stopPropagation()}>
-                  <select
-                    value={option}
-                    onChange={handleSearchChange}
-                    className="text-black bg-slate-300 hover:text-white hover:bg-neutral-700 p-2 px-5 w-24 rounded cursor-pointer"
-                  >
-                    {SEARCH.map((item) => (
-                      <option value={item.value} key={item.label}>
-                        {item.label}
-                      </option>
-                    ))}
-                  </select>
-                </li>
-                <li onClick={(e)=>e.stopPropagation()}>
-                  <select
-                    onChange={handlelanguagechange}
-                    className="bg-slate-300 hover:bg-stone-700 hover:text-white text-black p-2 w-24  rounded cursor-pointer"
-                  >
-                    {SUPPORTED_LANGUAGES.map((item) => (
-                      <option key={item.identifier} value={item.identifier}>
-                        {item.name}
-                      </option>
-                    ))}
-                  </select>
-                </li>
-              </>
-            )}
-            {movieId == undefined && (
-              <li>
-                <button
-                  className="bg-slate-300 hover:bg-indigo-800 hover:text-white text-black p-2 w-24 rounded "
-                  onClick={handleSearchToggle}
+      <Link to="/browse">
+        <img src={LOGO} alt="netflix_logo" className="w-36 p-0 m-0  " />
+      </Link>
+
+      {userDetail && (
+        <button
+          onClick={handleButtonToggle}
+          ref={ref}
+          className="flex pt-2 items-center"
+        >
+          {isVisisble && <FaCaretDown />}
+          <img src={userDetail.userImage} alt="" />
+        </button>
+      )}
+
+      {isVisisble && userDetail && (
+        <ul className="absolute flex items-center flex-col text-sm md:text-base top-20 right-8 w-fit space-y-3 py-4 px-8 rounded-md border border-slate-50 bg-gray-900">
+          <li className="border-b border-gray-400">{`Hi! ${userDetail.userName}`}</li>
+          {search && movieId == undefined && (
+            <>
+              <li onClick={(e) => e.stopPropagation()}>
+                <select
+                  value={option}
+                  onChange={handleSearchChange}
+                  className="text-black bg-slate-300 hover:text-white hover:bg-neutral-700 p-2 px-5 w-24 rounded cursor-pointer"
                 >
-                  {search ? "HomePage" : "Search"}
-                </button>
+                  {SEARCH.map((item) => (
+                    <option value={item.value} key={item.label}>
+                      {item.label}
+                    </option>
+                  ))}
+                </select>
               </li>
-            )}
+              <li onClick={(e) => e.stopPropagation()}>
+                <select
+                  onChange={handlelanguagechange}
+                  className="bg-slate-300 hover:bg-stone-700 hover:text-white text-black p-2 w-24  rounded cursor-pointer"
+                >
+                  {SUPPORTED_LANGUAGES.map((item) => (
+                    <option key={item.identifier} value={item.identifier}>
+                      {item.name}
+                    </option>
+                  ))}
+                </select>
+              </li>
+            </>
+          )}
+          {movieId == undefined && (
             <li>
               <button
-                className="bg-slate-300 hover:bg-red-700 text-black hover:text-white p-2  w-24 rounded"
-                onClick={handleSignOut}
+                className="bg-slate-300 hover:bg-indigo-800 hover:text-white text-black p-2 w-24 rounded "
+                onClick={handleSearchToggle}
               >
-                SignOut
+                {search ? "HomePage" : "Search"}
               </button>
             </li>
-          </ul>
-        )}
+          )}
+          <li>
+            <button
+              className="bg-slate-300 hover:bg-red-700 text-black hover:text-white p-2  w-24 rounded"
+              onClick={handleSignOut}
+            >
+              SignOut
+            </button>
+          </li>
+        </ul>
+      )}
     </nav>
   );
 };

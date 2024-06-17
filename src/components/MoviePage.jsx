@@ -10,8 +10,6 @@ const MoviePage = () => {
   const [suggestionList, setSuggestionList] = useState(null);
   const [videoList, setVideoList] = useState(null);
 
-  
-
   useEffect(() => {
     const getData = async () => {
       const response = await Promise.all(
@@ -26,14 +24,14 @@ const MoviePage = () => {
       );
       const trailer = filterData.length ? filterData : data[3].results[0];
       setVideoList(trailer);
-      console.log(data[1]);
     };
     getData();
   }, [movieId]);
 
-  if (!movieDetail) return <MoviePageShimmer/>;
+  if (!movieDetail) return <MoviePageShimmer />;
   const {
-    overview,tagline,
+    overview,
+    tagline,
     release_date,
     poster_path,
     title,
@@ -46,22 +44,27 @@ const MoviePage = () => {
   console.log(movieDetail);
   return (
     <div className="bg-black w-full opacity-90 text-white px-16">
-      <div
-        className=" pt-16 items-center flex md:flex-row flex-col-reverse"  >  
-          <div className=" pr-16 flex flex-col justify-center w-full md:w-8/12">
+      <div className=" pt-16 items-center flex md:flex-row flex-col-reverse">
+        <div className=" pr-16 flex flex-col justify-center w-full md:w-8/12">
           <span className="block py-4 font-semibold text-lg">{title}</span>
           <span className="text-slate-400 text-sm">{`${
             release_date.split("-")[0]
-          } | ${Math.floor(runtime / 60)}h ${(runtime % 60)}m | ${
+          } | ${Math.floor(runtime / 60)}h ${runtime % 60}m | ${
             genreList[0]
           } `}</span>
           <p className="py-4 text-sm">{overview}</p>
         </div>
         <div className="md:w-4/12 md:h-[600px]">
-        <img src={`${IMG_CDN_URL}${poster_path}`} alt="" className="h-full w-full" />
+          <img
+            src={`${IMG_CDN_URL}${poster_path}`}
+            alt=""
+            className="h-full w-full"
+          />
+        </div>
       </div>
-      </div>
-      <p className="text-center my-16 py-4 border-y border-slate-500">{tagline}</p>
+      <p className="text-center my-16 py-4 border-y border-slate-500">
+        {tagline}
+      </p>
       <div className="py-8">
         <span className="font-semibold text-xl">Videos |</span>
         <span className="text-slate-300 text-sm">{title}</span>

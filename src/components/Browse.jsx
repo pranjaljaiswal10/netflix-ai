@@ -6,24 +6,27 @@ import AISearchBar from "./AISearchBar";
 import AIMovieSuggestions from "./AIMovieSuggestions";
 import HomePageShimmer from "./HomePageShimmer";
 
-
 const Browse = () => {
   useGetMovies();
-  const {showSearch,movieResult,titleResult}= useSelector((store) => store.search);
-  const movies=useSelector((store)=>store.movies.allMovies)
-  
-  
+  const {
+    aiMovieResult, 
+    titleMovieResult,
+    showSearch,
+  } = useSelector((store) => store.search);
+  const movies = useSelector((store) => store.movies.allMovies);
+
   return showSearch ? (
-  <>
-     <AISearchBar />
-    { (movieResult.length!==0||titleResult.length!==0) &&( <AIMovieSuggestions/>)}
-     </>
-  ) : (
-    movies?
-   ( <div className="relative bg-opacity-90 bg-black">
-    <MainContainer />
+    <>
+      <AISearchBar />
+      {(aiMovieResult || titleMovieResult) && <AIMovieSuggestions />}
+    </>
+  ) : movies ? (
+    <div className="relative bg-opacity-90 bg-black">
+      <MainContainer />
       <SecondaryContainer />
-   </div>):<HomePageShimmer/>
+    </div>
+  ) : (
+    <HomePageShimmer />
   );
 };
 

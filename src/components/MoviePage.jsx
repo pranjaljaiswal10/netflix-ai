@@ -19,9 +19,10 @@ const MoviePage = () => {
       setMovieDetail(data[0]);
       setcastDetail(data[1].cast.slice(0, 10).map((item) => item.name));
       setSuggestionList(data[2].results);
-      const filterData = data[3].results.filter(
-        (video) => video.type === ("Trailer" || "Teaser")
+      const filterData = data[3]?.results.filter(
+        (video) =>   ["Trailer"].includes(video.type)      
       );
+      console.log(filterData)
       const trailer = filterData.length ? filterData : data[3].results[0];
       setVideoList(trailer);
     };
@@ -41,7 +42,6 @@ const MoviePage = () => {
   } = movieDetail;
   const genreList = genres.map((item) => item.name);
   const production = production_companies.map((item) => item.name);
-  console.log(movieDetail);
   return (
     <div className="bg-black w-full opacity-90 text-white px-16">
       <div className=" pt-16 items-center flex md:flex-row flex-col-reverse">
@@ -69,7 +69,8 @@ const MoviePage = () => {
         <span className="font-semibold text-xl">Videos |</span>
         <span className="text-slate-300 text-sm">{title}</span>
         <div className="flex flex-wrap">
-          {videoList.map((item) => (
+          {videoList?
+          (videoList.map((item) => (
             <div key={item.id} className="pr-6 rounded">
               <iframe
                 className="w-60 h-60"
@@ -83,7 +84,8 @@ const MoviePage = () => {
               ></iframe>
               <h2>{item.name}</h2>
             </div>
-          ))}
+          ))
+        ):(<h1>No Trailer Available</h1>)}
         </div>
       </div>
       <div className="py-5">

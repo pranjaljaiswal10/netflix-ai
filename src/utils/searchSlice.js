@@ -5,7 +5,7 @@ const searchSlice=createSlice({
     initialState:{
         showSearch:false,
         movieTitle:null,
-        aiMovieResult:null, //
+        aiMovieResult:null, 
         titleMovieResult:null
     },
     reducers:{

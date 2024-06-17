@@ -3,8 +3,8 @@ import { RouterProvider,createBrowserRouter } from 'react-router-dom'
 import Layout from './Layout.jsx'
 import Error from './components/Error.jsx';
 import HomePageShimmer from './components/HomePageShimmer.jsx';
-import MoviePageShimmer from './components/MoviePageShimmer.jsx';
 import './App.css'
+import MoviePageShimmer from './components/MoviePageShimmer.jsx';
 
 
 const Browse=lazy(()=>import("./components/Browse.jsx"))

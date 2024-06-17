@@ -3,7 +3,6 @@ import { IMG_CDN_URL } from "../utils/constant";
 import { IoImageSharp } from "react-icons/io5";
 
 const MovielistData = ({ title, moviePoster }) => {
- console.log(moviePoster)
   return (
     
     <div>
@@ -13,7 +12,7 @@ const MovielistData = ({ title, moviePoster }) => {
         </h1>
       )}
       {moviePoster && (
-        <div className="flex overflow-x-scroll p-4">
+        <div className="flex overflow-x-auto p-4">
           {moviePoster.map((item) => (
             <Link to={`/in/title/${item.id}`} key={item.id}>
               <div className="w-[90px] sm:w-[120px] md:[w-130px] lg:[150px] xl:[170px] mx-4 hover:border-slate-50">
@@ -21,7 +20,7 @@ const MovielistData = ({ title, moviePoster }) => {
                   <img
                     src={`${IMG_CDN_URL}${item.poster_path}`}
                     className="rounded-lg  "
-                    alt=""
+                    alt={item.title}
                   />
                 ) : (
                   <div className="w-[90px] sm:w-[120px] md:[w-130px] lg:[150px] xl:[170px] bg-gray-800 h-44 flex justify-center items-center rounded">

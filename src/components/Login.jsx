@@ -141,7 +141,7 @@ const Login = () => {
               {validMessage.password}
             </p>
           )}
-          {errorMessage && <p>{errorMessage}</p>}
+          {errorMessage && <p className="text-red-700 text-sm md:text-base">{errorMessage}</p>}
 
           <button
             type="submit"

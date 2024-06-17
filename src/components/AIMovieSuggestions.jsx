@@ -8,7 +8,6 @@ const AIMovieSuggestions = () => {
     titleMovieResult,
   } = useSelector((store) => store.search);
   const option = useSelector((store) => store.option.searchType);
-  console.log(movieTitle)
   return (
     
     <div

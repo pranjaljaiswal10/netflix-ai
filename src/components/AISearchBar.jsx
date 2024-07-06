@@ -7,7 +7,7 @@ import {
   HarmBlockThreshold,
   HarmCategory,
 } from "@google/generative-ai";
-import { API_OPTIONS, BG_URL } from "../utils/constant";
+import { API_OPTIONS } from "../utils/constant";
 import SearchPageShimmer from "./SearchPageShimmer";
 
 const AISearchBar = () => {
@@ -76,38 +76,26 @@ const AISearchBar = () => {
     option === "AI" ? geminiQuery() : normalQuery();
   };
   return (
-    <>
-      <div>
-        <div className="fixed  -z-10 ">
-          <img
-            src={BG_URL}
-            alt=""
-            className="object-cover md:h-full h-screen w-screen "
-          />
-        </div>
-        <div className="flex justify-center md:pt-[10%] pt-[25%] ">
+    
           <form
             onSubmit={(e) => e.preventDefault()}
-            className="flex bg-black w-full  md:w-1/2  p-3 text-sm sm:text-base rounded  "
+            className="w-11/12 xl:w-1/2 sm:w-1/2 md:w-1/2 lg:w-1/2 mx-auto "
           >
             <input
               type="text"
               placeholder={lang[identifier].gptSearchPlaceholder}
               value={searchTxt}
               onChange={(e) => setSearchTxt(e.target.value)}
-              className=" py-3 px-3 w-10/12 rounded placeholder:text-slate-500"
+              className="  lg:text-base  sm:text-sm text-xs rounded-l-full font-normal text-black border-black xl:pl-5 sm:pl-4 pl-3   lg:py-3 md:py-2.5 sm:py-2 py-1.5 xl:w-9/12 md:w-10/12 w-9/12 sm:w-10/12 lg:w-9/12 placeholder:text-slate-500"
             />
             <button
-              className="bg-red-700 text-white lg:px-6 py-2 text-sm sm:text-base ml-4 w-2/12  rounded"
+              className="bg-red-700 text-white  lg:py-3 md:py-2.5 sm:py-2 py-1.5 xl:px-8 sm:px-4 px-2 md:px-6 lg:px-8 font-semibold  lg:text-base  sm:text-sm text-xs  xl:w-3/12 md:w-2.5/12 sm:w-2/12 w-1.5/12 lg:w-3/12 rounded-r-full"
               onClick={(e) => handleOnClick(e)}
             >
               {lang[identifier].search}
             </button>
           </form>
-        </div>
-      </div>
-      {isLoading && <SearchPageShimmer />}
-    </>
+     
   );
 };
 

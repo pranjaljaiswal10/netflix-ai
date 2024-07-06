@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { BG_URL, USER_AVATAR } from "../utils/constant";
+import {  BG_URL, USER_AVATAR } from "../utils/constant";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -16,7 +16,7 @@ const Login = () => {
   const dispatch = useDispatch();
   const [isSignInForm, setIsSigInForm] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
-  const [form, setForm] = useState({ email: "", name: "", password: "" });
+  const [form, setForm] = useState({ email: "test@demo.com", name: "Test User", password: "Test1234@" });
   const [validMessage, setValidMessage] = useState(null);
   const handleFormChange = (e) => {
     setForm({ ...form, [e.target.id]: e.target.value });
@@ -82,12 +82,7 @@ const Login = () => {
   };
   return (
     <div className="relative flex justify-center items-center">
-      <img
-        src={BG_URL}
-        alt="netflix"
-        className="object-cover lg:h-screen w-screen"
-      />
-      <div className=" absolute lg:w-4/12 w-6/12 sm:7/12 md:5/12 lg:my-28  md:my-24 my-48">
+      <div className="bg-black bg-opacity-75 rounded-md  lg:w-4/12 w-11/12 sm:w-7/12 md:w-5/12 absolute mx-auto lg:my-28 my-44 md:my-24 right-0 left-0 z-20 py-4 md:py-6">
         <form
           onSubmit={handleSubmit}
           className=" rounded-md flex flex-col justify-center items-center px-8 py-4 sm:px-12 sm:py-6 lg:px-24 lg:py-12 space-y-4 md:space-y-8 text-white bg-black bg-opacity-80   "
@@ -169,6 +164,13 @@ const Login = () => {
             </button>
           )}
         </form>
+      </div>
+      <div className="overflow-hidden w-full">
+        <img
+          className=" brightness-[.6] lg:scale-110 md:scale-x-125 sm:scale-x-150  sm:scale-y-110  md:h-[600px] sm:h-[600px] object-cover h-screen lg:h-screen  w-full"
+          alt="background"
+          src={BG_URL}
+        ></img>
       </div>
     </div>
   );

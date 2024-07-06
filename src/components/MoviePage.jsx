@@ -22,7 +22,7 @@ const MoviePage = () => {
       const filterData = data[3]?.results.filter(
         (video) =>   ["Trailer"].includes(video.type)      
       );
-      console.log(filterData)
+      console.log(data[2])
       const trailer = filterData.length ? filterData : data[3].results[0];
       setVideoList(trailer);
     };

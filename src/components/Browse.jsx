@@ -1,20 +1,28 @@
 import MainContainer from "./MainContainer";
 import SecondaryContainer from "./SecondaryContainer";
 import useGetMovies from "../utils/hooks/useGetMovies";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import AISearchBar from "./AISearchBar";
 import AIMovieSuggestions from "./AIMovieSuggestions";
 import HomePageShimmer from "./HomePageShimmer";
+import { removeAIResult } from "../utils/searchSlice";
+import { useEffect } from "react";
 
 const Browse = () => {
   useGetMovies();
-  const {
-    aiMovieResult, 
-    titleMovieResult,
-    showSearch,
-  } = useSelector((store) => store.search);
+  const { aiMovieResult, titleMovieResult, showSearch } = useSelector(
+    (store) => store.search
+  );
   const movies = useSelector((store) => store.movies.allMovies);
+  const dispatch = useDispatch();
+ 
+useEffect(()=>{
 
+  if (!showSearch) {
+    dispatch(removeAIResult());
+  }
+},[showSearch,dispatch])
+  
   return showSearch ? (
     <>
       <AISearchBar />

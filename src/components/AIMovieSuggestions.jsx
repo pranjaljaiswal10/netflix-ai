@@ -11,7 +11,7 @@ const AIMovieSuggestions = () => {
   return (
     
     <div
-      className={`bg-black opacity-90 rounded text-white mx-8 ${
+      className={`xl:px-16 md:px-8 sm:px-4 px-1.5 lg:px-12 ${
       aiMovieResult && titleMovieResult ? "mt-0" : "mt-24"
       }`}
     >

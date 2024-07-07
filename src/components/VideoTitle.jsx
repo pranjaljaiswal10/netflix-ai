@@ -14,7 +14,7 @@ const VideoTitle = ({ title, info, id }) => {
         <h1 className="text-base sm:text-3xl md:text-4xl xl:text-5xl font-bold">
           {title}
         </h1>
-        <p className="py-6 text-sm md:text-base line-clamp-2 xl:line-clamp-3">
+        <p className="py-6 hidden md:block  text-base line-clamp-2 xl:line-clamp-3">
           {info}
         </p>
       </div>

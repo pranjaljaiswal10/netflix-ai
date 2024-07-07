@@ -44,21 +44,21 @@ const MoviePage = () => {
   const production = production_companies.map((item) => item.name);
   return (
     <div className="bg-black w-full opacity-90 text-white px-16">
-      <div className=" pt-16 items-center flex md:flex-row flex-col-reverse">
-        <div className=" pr-16 flex flex-col justify-center w-full md:w-8/12">
+      <div className="text-center md:text-start pt-16 items-center  flex md:flex-row flex-col-reverse">
+        <div className=" md:pr-16 pr-0 flex flex-col justify-center w-full md:w-8/12">
           <span className="block py-4 font-semibold text-lg">{title}</span>
           <span className="text-slate-400 text-sm">{`${
             release_date.split("-")[0]
           } | ${Math.floor(runtime / 60)}h ${runtime % 60}m | ${
             genreList[0]
           } `}</span>
-          <p className="py-4 text-sm">{overview}</p>
+          <p className="text-center md:text-start py-4 text-sm">{overview}</p>
         </div>
         <div className="md:w-4/12 md:h-[600px]">
           <img
             src={`${IMG_CDN_URL}${poster_path}`}
-            alt=""
-            className="h-full w-full"
+            alt="poster"
+            className="h-[500px] lg:h-full w-full"
           />
         </div>
       </div>

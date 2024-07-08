@@ -8,7 +8,7 @@ import {
   HarmCategory,
 } from "@google/generative-ai";
 import { API_OPTIONS, BG_URL } from "../utils/constant";
-import AIMovieSuggestions from "./AIMovieSuggestions"
+import AIMovieSuggestions from "./AIMovieSuggestions";
 import SearchPageShimmer from "./SearchPageShimmer";
 
 const AISearchBar = () => {
@@ -17,7 +17,10 @@ const AISearchBar = () => {
   const dispatch = useDispatch();
   const identifier = useSelector((store) => store.config.lang);
   const option = useSelector((store) => store.option.searchType);
-  const { aiMovieResult, titleMovieResult}=useSelector(store=>store.search)
+  const { aiMovieResult, titleMovieResult } = useSelector(
+    (store) => store.search
+  );
+  console.log(aiMovieResult);
   async function searchMovies(name) {
     const response = await fetch(
       `https://api.themoviedb.org/3/search/movie?query=${name}&include_adult=false&language=en-US&page=1`,
@@ -78,32 +81,40 @@ const AISearchBar = () => {
     option === "AI" ? geminiQuery() : normalQuery();
   };
   return (
-        <div>
-          <div className="fixed -z-10">
-          <img src={BG_URL} alt="bgImage" className="h-screen object-cover  md:w-screen"/>
-          </div>
-         <div className="pt-[15%] md:pt-[5%] flex justify-center">
-          <form
-            onSubmit={(e) => e.preventDefault()}
-            className="w-full m-2 md:w-1/2 bg-slate-700 grid grid-cols-12 rounded-lg "
+    <div>
+      <div className="fixed -z-10">
+        <img
+          src={BG_URL}
+          alt="bgImage"
+          className="h-screen object-cover  md:w-screen"
+        />
+      </div>
+      <div className="pt-[15%] md:pt-[5%] flex justify-center">
+        <form
+          onSubmit={(e) => e.preventDefault()}
+          className="w-full m-2 md:w-1/2 bg-slate-700 grid grid-cols-12 rounded-lg "
+        >
+          <input
+            type="text"
+            placeholder={lang[identifier].gptSearchPlaceholder}
+            value={searchTxt}
+            onChange={(e) => setSearchTxt(e.target.value)}
+            className="py-2 px-4 m-2 border border-black rounded-lg col-span-9"
+          />
+          <button
+            className="py-2 px-4 m-2 rounded-lg bg-[#E50914] text-white col-span-3"
+            onClick={(e) => handleOnClick(e)}
           >
-            <input
-              type="text"
-              placeholder={lang[identifier].gptSearchPlaceholder}
-              value={searchTxt}
-              onChange={(e) => setSearchTxt(e.target.value)}
-              className="py-2 px-4 m-2 border border-black rounded-lg col-span-9"
-            />
-            <button
-              className="py-2 px-4 m-2 rounded-lg bg-[#E50914] text-white col-span-3"
-              onClick={(e) => handleOnClick(e)}
-            >
-              {lang[identifier].search}
-            </button>
-          </form>
-          </div>
-          {(aiMovieResult || titleMovieResult )&& <AIMovieSuggestions/>}
-       </div>
+            {lang[identifier].search}
+          </button>
+        </form>
+      </div>
+      {isLoading ? (
+        <SearchPageShimmer />
+      ) : (
+        (aiMovieResult || titleMovieResult) && <AIMovieSuggestions />
+      )}
+    </div>
   );
 };
 

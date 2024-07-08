@@ -13,14 +13,14 @@ const HomePageShimmer = () => {
           </div>
         </div>
         <div className="mt-32 h-8 w-40 bg-zinc-900"></div>
-        <div className="flex flex-wrap mt-12 ml-0">
+        <div className="flex flex-wrap mt-12 ml-0 gap-8">
           {Array(9)
             .fill(" ")
             .map((item, index) => (
-              <div
-                key={index}
-                className=" rounded w-36 h-48 bg-zinc-900 mr-4 my-2"
-              ></div>
+              <div key={index}>
+                <div className=" rounded w-40 h-60 md:w-56 md:h-80 bg-zinc-900 "></div>
+                <div className="bg-zinc-900 rounded h-4 w-36 mt-2"></div>
+              </div>
             ))}
         </div>
       </div>

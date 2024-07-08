@@ -6,10 +6,10 @@ const VideoBackground = ({ movieId }) => {
   const trailer = useSelector((store) => store.movies.trailer);
   const { isPlaying, isMute } = useSelector((store) => store.play);
   return (
-    <div className="p-0 w-screen">
+    <div className="">
       {
         <iframe
-          className=" w-screen  aspect-video"
+          className=" w-screen aspect-square  md:aspect-video"
           src={`https://www.youtube.com/embed/${trailer?.key}?&autoplay=${
             isPlaying ? `1` : `0`
           }&mute=${isMute ? `0` : `1`}`}
@@ -18,7 +18,6 @@ const VideoBackground = ({ movieId }) => {
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         ></iframe>
       }
-      
     </div>
   );
 };

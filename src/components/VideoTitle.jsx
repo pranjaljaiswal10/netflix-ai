@@ -9,37 +9,39 @@ const VideoTitle = ({ title, info, id }) => {
   const dispatch = useDispatch();
   const { isMute, isPlaying } = useSelector((store) => store.play);
   return (
-    <div className="w-screen aspect-video lg:pt-[15%] md:pt-[15%] sm-[10%] px-6 md:px-12 absolute top-10 text-white  from-black ">
+    <div className="w-screen aspect-video pt-[30%] md:pt-[15%] px-6 md:px-24 absolute top-10 text-white  from-black ">
       <div className="w-1/2 mb-8">
-        <h1 className="text-base sm:text-3xl md:text-4xl xl:text-5xl font-bold">
+        <h1 className="font-semibold md:font-bold py-4 md:py-0 text-2xl md:text-5xl">
           {title}
         </h1>
-        <p className="py-6 hidden md:block  text-base line-clamp-2 xl:line-clamp-3">
+        <p className="py-6 hidden md:block  text-base line-clamp-2 xl:line-clamp-3 md:text-lg">
           {info}
         </p>
       </div>
       <div className=" flex">
         <div className="w-6/12 flex">
-         { isPlaying?<button
-            onClick={() => {
-              dispatch(togglePlay());
-            }}
-            className="bg-white hover:bg-opacity-80 text-black   rounded px-2 md:px-4 py-1 sm:py-2 text-sm sm:text-base md:text-lg lg:text-xl  hover:opacity-80 "
-          >  
+          {isPlaying ? (
+            <button
+              onClick={() => {
+                dispatch(togglePlay());
+              }}
+              className="bg-white hover:bg-opacity-80 text-black   rounded px-2 md:px-4 py-1 sm:py-2 text-sm sm:text-base md:text-lg lg:text-xl  hover:opacity-80 "
+            >
               <FaPause className="inline font-semibold" /> Pause
-          </button>
-          :<button
-            onClick={() => {
-              dispatch(togglePlay());
-            }}
-            className="bg-white hover:bg-opacity-80 text-black   rounded px-2 md:px-4 py-1 sm:py-2 text-sm sm:text-base md:text-lg lg:text-xl  hover:opacity-80 "
-          >  
-              <FaPlay className="inline font-semibold" /> Play
-          </button>
-}
+            </button>
+          ) : (
+            <button
+              onClick={() => {
+                dispatch(togglePlay());
+              }}
+              className="bg-white hover:bg-opacity-80 text-black w-36 md:w-fit   rounded px-4 md:px-12 py-1 sm:py-2  md:text-xl  hover:opacity-80 flex gap-2 items-center"
+            >
+              <FaPlay /> Play
+            </button>
+          )}
           <Link to={`/in/title/${id}`}>
-            <button className=" ml-4 bg-gray-500 hover:bg-opacity-80 text-white px-2 md:px-4 py-1 sm:py-2  text-sm sm:text-base md:text-lg lg:text-xl  rounded">
-              <GrCircleInformation className="inline font-semibold" /> More Info
+            <button className=" ml-4 bg-gray-500 hover:bg-opacity-80 text-white px-2 w-36 md:w-fit md:px-8 py-1 sm:py-2  md:text-xl flex gap-4 items-center rounded">
+              <GrCircleInformation /> More Info
             </button>
           </Link>
         </div>

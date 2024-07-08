@@ -31,7 +31,7 @@ export const SUPPORTED_LANGUAGES = [
 ];
 
 export const SEARCH = [
-  { value: "AI", label: "AI" },
+  { value: "AI", label: "Gemini-AI" },
   { value: "Title", label: "Title" },
 ];
 

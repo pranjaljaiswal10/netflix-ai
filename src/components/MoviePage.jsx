@@ -19,10 +19,10 @@ const MoviePage = () => {
       setMovieDetail(data[0]);
       setcastDetail(data[1].cast.slice(0, 10).map((item) => item.name));
       setSuggestionList(data[2].results);
-      const filterData = data[3]?.results.filter(
-        (video) =>   ["Trailer"].includes(video.type)      
+      const filterData = data[3]?.results.filter((video) =>
+        ["Trailer"].includes(video.type)
       );
-      console.log(data[2])
+
       const trailer = filterData.length ? filterData : data[3].results[0];
       setVideoList(trailer);
     };
@@ -68,24 +68,26 @@ const MoviePage = () => {
       <div className="py-8">
         <span className="font-semibold text-xl">Videos |</span>
         <span className="text-slate-300 text-sm">{title}</span>
-        <div className="flex flex-wrap">
-          {videoList?
-          (videoList.map((item) => (
-            <div key={item.id} className="pr-6 rounded">
-              <iframe
-                className="w-60 h-60"
-                src={
-                  "https://www.youtube.com/embed/" +
-                  item?.key +
-                  "?&autoplay=0&mute=0"
-                }
-                title="Trailer Player"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              ></iframe>
-              <h2>{item.name}</h2>
-            </div>
-          ))
-        ):(<h1>No Trailer Available</h1>)}
+        <div className="flex flex-wrap justify-center md:justify-start">
+          {videoList ? (
+            videoList.map((item) => (
+              <div key={item.id} className="pr-6 rounded">
+                <iframe
+                  className="w-60 h-60"
+                  src={
+                    "https://www.youtube.com/embed/" +
+                    item?.key +
+                    "?&autoplay=0&mute=0"
+                  }
+                  title="Trailer Player"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                ></iframe>
+                <h2>{item.name}</h2>
+              </div>
+            ))
+          ) : (
+            <h1>No Trailer Available</h1>
+          )}
         </div>
       </div>
       <div className="py-5">
@@ -112,11 +114,14 @@ const MoviePage = () => {
       <div className="py-8">
         <h3 className="font-semibold text-xl mb-4 ">More Like this</h3>
 
-        <div className="grid lg:grid-cols-5 md:grid-cols-3 grid-cols-2 justify-between  gap-20">
+        <div className="grid lg:grid-cols-5 md:grid-cols-3 sm:grid-cols-2 grd-cols-1 justify-center  gap-20">
           {suggestionList.map((item) => (
             <Link to={`/in/title/${item.id}`} key={item.id}>
-              <div className="  hover:border-slate-50 hover:border-4 rounded">
-                <img src={`${IMG_CDN_URL}${item.poster_path}`} alt="" />
+              <div className="  hover:border-slate-50 hover:border-4  rounded md:w-56 w-40">
+                <img
+                  src={`${IMG_CDN_URL}${item.poster_path}`}
+                  alt="poster-img"
+                />
               </div>
             </Link>
           ))}

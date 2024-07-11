@@ -3,6 +3,10 @@
   margin: 0;
 }
 
+html{
+  background-color: black
+}
+
 input{
   outline: 1px solid #000;
 }

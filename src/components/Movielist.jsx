@@ -11,7 +11,7 @@ const MovielistData = ({ title, moviePoster }) => {
         </h1>
       )}
       {moviePoster && (
-        <div className="flex overflow-x-auto">
+        <div className="flex overflow-x-auto no-scrollbar">
           <div className="flex gap-4">
             {moviePoster.map((item) => (
               <div

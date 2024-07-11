@@ -14,7 +14,7 @@ const VideoTitle = ({ title, info, id }) => {
         <h1 className="font-semibold md:font-bold py-4 md:py-0 text-2xl md:text-5xl">
           {title}
         </h1>
-        <p className="py-6 hidden md:block  text-base line-clamp-2 xl:line-clamp-3 md:text-lg">
+        <p className="py-6 hidden lg:block  text-base line-clamp-2 xl:line-clamp-3 md:text-lg">
           {info}
         </p>
       </div>
@@ -36,7 +36,7 @@ const VideoTitle = ({ title, info, id }) => {
               }}
               className="bg-white hover:bg-opacity-80 text-black w-36 md:w-fit   rounded px-4 md:px-12 py-1 sm:py-2  md:text-xl  hover:opacity-80 flex gap-2 items-center"
             >
-              <FaPlay /> Play
+              <FaPlay /> Replay
             </button>
           )}
           <Link to={`/in/title/${id}`}>

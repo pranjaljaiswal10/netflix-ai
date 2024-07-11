@@ -3,8 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const buttonSlice=createSlice({
     name:"play",
     initialState:{
-        isPlaying:false,
-        isMute:false
+        isPlaying:true,
+        isMute:true,
     },
     reducers:{
         togglePlay:(state)=>{

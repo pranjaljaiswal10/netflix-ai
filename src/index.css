@@ -12,4 +12,12 @@
     -ms-overflow-style: none; /*IE and Edge */
     scrollbar-width: none; /*firefox*/
   }
+   .no-scrollbar::-webkit-scrollbar{
+    display: block;
+   }
+  /* Hide scrollbar for IE,Edge and Firefox */
+  .no-scrollbar{
+    -ms-overflow-style:-ms-autohiding-scrollbar; /*IE and Edge */
+    scrollbar-width:thin; /*firefox*/
+  }
 }

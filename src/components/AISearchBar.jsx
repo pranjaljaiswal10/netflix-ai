@@ -9,7 +9,7 @@ import {
 } from "@google/generative-ai";
 import { API_OPTIONS, BG_URL } from "../utils/constant";
 import AIMovieSuggestions from "./AIMovieSuggestions";
-import SearchPageShimmer from "./SearchPageShimmer";
+
 
 const AISearchBar = () => {
   const [searchTxt, setSearchTxt] = useState("");
@@ -17,10 +17,7 @@ const AISearchBar = () => {
   const dispatch = useDispatch();
   const identifier = useSelector((store) => store.config.lang);
   const option = useSelector((store) => store.option.searchType);
-  const { aiMovieResult, titleMovieResult } = useSelector(
-    (store) => store.search
-  );
-  console.log(aiMovieResult);
+
   async function searchMovies(name) {
     const response = await fetch(
       `https://api.themoviedb.org/3/search/movie?query=${name}&include_adult=false&language=en-US&page=1`,
@@ -78,7 +75,7 @@ const AISearchBar = () => {
   };
   const handleOnClick = () => {
     setIsLoading(true);
-    option === "AI" ? geminiQuery() : normalQuery();
+    option === "AI" && searchTxt!=="" ? geminiQuery() : normalQuery();
   };
   return (
     <div>
@@ -101,19 +98,21 @@ const AISearchBar = () => {
             onChange={(e) => setSearchTxt(e.target.value)}
             className="py-2 px-4 m-2 border border-black rounded-lg col-span-9"
           />
-          <button
-            className="py-2 px-4 m-2 rounded-lg bg-[#E50914] text-white col-span-3"
-            onClick={(e) => handleOnClick(e)}
-          >
-            {lang[identifier].search}
-          </button>
+          
+            <button
+              className="py-2 flex justify-center items-center px-4 m-2 rounded-lg bg-[#E50914] text-white col-span-3"
+              onClick={(e) => handleOnClick(e)}
+              disabled={searchTxt==""}
+            >
+              {isLoading ? (
+                <div className="w-4 h-4 text-center border-t border-solid border-gray-300 rounded-full animate-spin"></div>
+              ) : (
+                lang[identifier].search
+              )}
+            </button>
         </form>
       </div>
-      {isLoading ? (
-        <SearchPageShimmer />
-      ) : (
-        (aiMovieResult || titleMovieResult) && <AIMovieSuggestions />
-      )}
+      {!isLoading && <AIMovieSuggestions />}
     </div>
   );
 };

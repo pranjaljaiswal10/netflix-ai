@@ -1,8 +1,12 @@
 import { Link } from "react-router-dom";
 import { IMG_CDN_URL } from "../utils/constant";
 import { IoImageSharp } from "react-icons/io5";
+import { useSelector } from "react-redux";
 
 const MovielistData = ({ title, moviePoster }) => {
+  const { aiMovieResult, titleMovieResult } = useSelector(
+    (store) => store.search
+  );
   return (
     <div className="px-4">
       {title && (
@@ -13,7 +17,10 @@ const MovielistData = ({ title, moviePoster }) => {
       {moviePoster && (
         <div className="flex overflow-x-auto no-scrollbar">
           <div className="flex gap-4">
-            {moviePoster.map((item) => (
+            {(aiMovieResult || titleMovieResult
+              ? moviePoster.filter((item) => item.original_language === "hi")
+              : moviePoster
+            ).map((item) => (
               <div
                 className="w-40 md:w-56 hover:border-slate-50 cursor-pointer"
                 key={item.id}

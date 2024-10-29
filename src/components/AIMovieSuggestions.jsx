@@ -10,7 +10,7 @@ const AIMovieSuggestions = () => {
   const option = useSelector((store) => store.option.searchType);
   return (
     
-    <div
+   (aiMovieResult|| titleMovieResult) &&( <div
       className={` text-white px-4 py-2 bg-gray-900 bg-opacity-90 ${
       aiMovieResult && titleMovieResult ? "mt-0" : "mt-12"
       }`}
@@ -27,7 +27,7 @@ const AIMovieSuggestions = () => {
       ) : (
         <MovielistData title={movieTitle} moviePoster={titleMovieResult} />
       )}
-    </div>
+    </div>)
   );
 };
 

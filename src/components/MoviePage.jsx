@@ -1,4 +1,4 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import { API_OPTIONS, IMG_CDN_URL, urls } from "../utils/constant";
 import { useEffect, useState } from "react";
 import MoviePageShimmer from "./MoviePageShimmer";
@@ -9,7 +9,10 @@ const MoviePage = () => {
   const [castDetail, setcastDetail] = useState(null);
   const [suggestionList, setSuggestionList] = useState(null);
   const [videoList, setVideoList] = useState(null);
-
+  const {pathname}=useLocation()
+  useEffect(()=>{
+   window.scrollTo(0,0)
+  },[pathname])
   useEffect(() => {
     const getData = async () => {
       const response = await Promise.all(

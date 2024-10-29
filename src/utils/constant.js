@@ -22,7 +22,7 @@ export const movieCategory = [
 export const IMG_CDN_URL = "https://image.tmdb.org/t/p/w500";
 
 export const BG_URL =
-  "https://assets.nflxext.com/ffe/siteui/vlv3/a56dc29b-a0ec-4f6f-85fb-50df0680f80f/2f8ae902-8efe-49bb-9a91-51b6fcc8bf46/IN-en-20240617-popsignuptwoweeks-perspective_alpha_website_large.jpg";
+  "https://assets.nflxext.com/ffe/siteui/vlv3/7c0e18aa-2c95-474d-802e-7f30e75dcca4/web/IN-en-20241014-TRIFECTA-perspective_e7121311-c11e-4809-a3e6-22abffa33569_large.jpg";
 
 export const SUPPORTED_LANGUAGES = [
   { identifier: "en", name: "English" },

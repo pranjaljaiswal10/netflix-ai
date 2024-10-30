@@ -21,7 +21,7 @@ const searchSlice=createSlice({
         addTitleMovie:(state,action)=>{
             state.titleMovieResult=action.payload
         },
-        removeAIResult:(state,action)=>{
+        removeResult:(state,action)=>{
              state.aiMovieResult=null,
              state.movieTitle=null,
              state.titleMovieResult=null
@@ -30,4 +30,4 @@ const searchSlice=createSlice({
 })
 
 export default searchSlice.reducer;
-export const {addAIMovie,toggleSearchBar,addMovieTitle,addTitleMovie,removeAIResult}=searchSlice.actions
+export const {addAIMovie,toggleSearchBar,addMovieTitle,addTitleMovie,removeResult}=searchSlice.actions

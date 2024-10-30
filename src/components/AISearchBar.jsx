@@ -73,7 +73,8 @@ const AISearchBar = () => {
     dispatch(addAIMovie(tmdbMvies));
     setIsLoading(false);
   };
-  const handleOnClick = () => {
+  const handleOnClick = (e) => {
+   console.log(e)
     setIsLoading(true);
     option === "AI" && searchTxt!=="" ? geminiQuery() : normalQuery();
   };
@@ -96,7 +97,7 @@ const AISearchBar = () => {
             placeholder={lang[identifier].gptSearchPlaceholder}
             value={searchTxt}
             onChange={(e) => setSearchTxt(e.target.value)}
-            className="py-2 px-4 m-2 border border-black rounded-lg col-span-9"
+            className="py-2 px-4 m-2 border border-black rounded-lg col-span-9 placeholder-gray-600"
           />
           
             <button
@@ -112,7 +113,7 @@ const AISearchBar = () => {
             </button>
         </form>
       </div>
-      {!isLoading && <AIMovieSuggestions />}
+      {(!isLoading) && <AIMovieSuggestions />}
     </div>
   );
 };

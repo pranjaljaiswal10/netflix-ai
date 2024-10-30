@@ -4,7 +4,7 @@ import useGetMovies from "../utils/hooks/useGetMovies";
 import { useDispatch, useSelector } from "react-redux";
 import AISearchBar from "./AISearchBar";
 import HomePageShimmer from "./HomePageShimmer";
-import { removeAIResult } from "../utils/searchSlice";
+import { removeResult } from "../utils/searchSlice";
 import { useEffect } from "react";
 
 const Browse = () => {
@@ -15,7 +15,7 @@ const Browse = () => {
 
   useEffect(() => {
     if (!showSearch) {
-      dispatch(removeAIResult());
+      dispatch(removeResult());
     }
   }, [showSearch, dispatch]);
 

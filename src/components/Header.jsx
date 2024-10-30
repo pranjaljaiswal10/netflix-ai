@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { addUser, removeUser } from "../utils/userSlice";
 import { changeLanguage } from "../utils/configureSlice";
 import { changeOption } from "../utils/optionSlice";
-import { toggleSearchBar } from "../utils/searchSlice";
+import { removeResult, toggleSearchBar } from "../utils/searchSlice";
 import { FaCaretDown } from "react-icons/fa";
 import useOutsideClick from "../utils/hooks/useOutsideClick";
 
@@ -46,10 +46,14 @@ const Header = () => {
     dispatch(toggleSearchBar());
   };
   const handlelanguagechange = (e) => {
+    console.log()
     dispatch(changeLanguage(e.target.value));
   };
 
   const handleSearchChange = (e) => {
+    if(e.type==="change"){
+      dispatch(removeResult())
+    }
     dispatch(changeOption(e.target.value));
   };
 
